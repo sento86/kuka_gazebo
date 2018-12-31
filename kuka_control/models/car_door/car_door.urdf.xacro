@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<robot name="car_door" xmlns:xacro="http://ros.org/wiki/xacro">
+
+  <xacro:arg name="gazebo" default="false"/>
+
+  <!-- Car door URDF -->
+  <xacro:include filename="$(find kuka_control)/models/car_door/car_door.xacro"/>
+
+  <!-- Car door (Vito) -->
+  <xacro:car_door name="door1" parent="base_link">
+      <origin xyz="0.0 0.0 0.6" rpy="0 0 0" />
+  </xacro:car_door>
+
+</robot>

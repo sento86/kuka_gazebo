@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<launch>
+
+  <!-- Launch the Gazebo simulation -->
+  <include file="$(find kuka_gazebo)/launch/empty_world.launch"/>
+
+  <!-- Launch Kuka Agilus KR6 -->
+  <include file="$(find kuka_control)/launch/robot.launch">
+    <arg name="ns" value="kr6"/>
+    <arg name="x0" value="0"/>
+    <arg name="y0" value="0"/>
+    <arg name="z0" value="2"/>
+    <arg name="R0" value="3.1416"/>
+    <arg name="P0" value="0"/>
+    <arg name="Y0" value="0"/>
+  </include>
+
+  <!-- Launch cell -->
+  <include file="$(find kuka_control)/launch/object_description.launch">
+    <arg name="ns" value="cell"/>
+    <arg name="tf" value="cell"/>
+    <arg name="x0" value="0"/>
+    <arg name="y0" value="0"/>
+    <arg name="z0" value="0"/>
+    <arg name="R0" value="0"/>
+    <arg name="P0" value="0"/>
+    <arg name="Y0" value="0"/>
+  </include>
+
+  <!-- Launch car door -->
+  <!--<include file="$(find kuka_control)/launch/object_description.launch">
+    <arg name="ns" value="car_door"/>
+    <arg name="tf" value="car_door"/>
+    <arg name="x0" value="0"/>
+    <arg name="y0" value="0"/>
+    <arg name="z0" value="0.8"/>
+    <arg name="R0" value="0"/>
+    <arg name="P0" value="0"/>
+    <arg name="Y0" value="0"/>
+  </include>-->
+
+  <!-- Launch visualization -->
+  <include file="$(find kuka_control)/launch/rviz.launch"/>
+
+  <!-- Launch the MoveIt! move group -->
+<!--  <include file="$(find kuka_control)/launch/moveit.launch"/>-->
+
+</launch>

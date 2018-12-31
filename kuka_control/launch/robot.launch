@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<launch>
+
+  <arg name="ns" default=""/>
+  <arg name="x0" default="0"/>
+  <arg name="y0" default="0"/>
+  <arg name="z0" default="0"/>
+  <arg name="R0" default="0"/>
+  <arg name="P0" default="0"/>
+  <arg name="Y0" default="0"/>
+
+  <group  ns="$(arg ns)">
+
+    <param name="x0" value= "$(arg x0)" />
+    <param name="y0" value= "$(arg y0)" />
+    <param name="z0" value= "$(arg z0)" />
+    <param name="R0" value= "$(arg R0)" />
+    <param name="P0" value= "$(arg P0)" />
+    <param name="Y0" value= "$(arg Y0)" />
+
+    <node pkg="tf" type="static_transform_publisher" name="world_to_base_$(arg ns)" args="$(arg x0) $(arg y0) $(arg z0) $(arg Y0) $(arg P0) $(arg R0) /world /$(arg ns)/world 100" />
+
+    <!-- Generate/Load robot description file -->
+    <include file="$(find kuka_description)/launch/description.launch"/>
+
+    <!-- Spawn urdf into Gazebo -->
+    <node name="spawn_urdf_$(arg ns)" pkg="gazebo_ros" type="spawn_model" args="-param robot_description -urdf -model kuka_$(arg ns)
+        -x $(arg x0)
+        -y $(arg y0)
+        -z $(arg z0)
+        -R $(arg R0)
+        -P $(arg P0)
+        -Y $(arg Y0)
+	-J kuka_$(arg ns)::joint_a1 0
+	-J kuka_$(arg ns)::joint_a2 0
+	-J kuka_$(arg ns)::joint_a3 0
+	-J kuka_$(arg ns)::joint_a4 0
+	-J kuka_$(arg ns)::joint_a5 0
+	-J kuka_$(arg ns)::joint_a6 0"/>
+
+    <!-- TODO -->
+    <!--<remap from="/position_trajectory_controller/command" to="/kr6/position_trajectory_controller/command"/>
+    <remap from="/position_trajectory_controller/efforts" to="/kr6/position_trajectory_controller/efforts"/>-->
+
+    <!-- Load joints controllers configurations -->
+    <rosparam file="$(find kuka_control)/config/simulation_controllers.yaml" command="load"/>
+
+    <!-- Load the controllers -->
+    <node name="controller_spawner" pkg="controller_manager" type="spawner" respawn="false" output="screen" args="
+        joint_state_controller
+        position_trajectory_controller">
+    </node>
+
+    <!-- convert joint states to TF transforms for rviz, etc -->
+    <node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher" respawn="false" output="screen">
+      <param name="tf_prefix" type="string" value="$(arg ns)" />
+    </node>
+
+  </group>
+
+</launch>

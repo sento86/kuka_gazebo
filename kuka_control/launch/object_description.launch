@@ -1,0 +1,54 @@
+<?xml version="1.0"?>
+<launch>
+
+<!-- ****************************************************************************** -->
+
+  <arg name="ns" default="" />
+  <arg name="tf" default="" />
+  <arg name="x0" default="0"/>
+  <arg name="y0" default="0"/>
+  <arg name="z0" default="0"/>
+  <arg name="R0" default="0"/>
+  <arg name="P0" default="0"/>
+  <arg name="Y0" default="0"/>
+
+<!-- ****************************************************************************** -->
+
+  <!-- Publish a static transform between the world and the base of the robot -->
+  <node pkg="tf2_ros" type="static_transform_publisher" name="base_to_$(arg ns)" args="$(arg x0) $(arg y0) $(arg z0) $(arg Y0) $(arg P0) $(arg R0) /world $(arg ns)/base_link" />
+
+<!-- ****************************************************************************** -->
+
+  <!-- Create Robot model -->
+  <param name="$(arg ns)/robot_description" command="$(find xacro)/xacro --inorder '$(find kuka_control)/models/$(arg ns)/$(arg ns).urdf.xacro'" />
+  <!--<param name="$(arg ns)/robot_description" textfile="$(find kuka_control)/models/cell_idf/model.sdf" />-->
+
+<!-- ****************************************************************************** -->
+
+  <!-- Robot state publisher -->
+<!--  <node name="$(arg ns)_model_state_publisher" pkg="model_state_publisher" type="robot_state_publisher" respawn="true" output="screen">-->
+  <node name="$(arg ns)_model_state_publisher" pkg="model_state_publisher" type="model_state_publisher" respawn="true" output="screen">
+    <param name="publish_frequency" type="double" value="100.0" />
+    <param name="tf_prefix" type="string" value="$(arg tf)" />
+    <param name="name_space" type="string" value="$(arg ns)" />
+  </node>
+
+<!--  <node name="$(arg ns)_model_joint_state_publisher" pkg="model_joint_state_publisher" type="joint_state_publisher" respawn="true">-->
+  <node name="$(arg ns)_model_joint_state_publisher" pkg="model_joint_state_publisher" type="model_joint_state_publisher" respawn="true">
+    <param name="rate" type="double" value="100.0" />
+    <param name="tf_prefix" type="string" value="$(arg tf)" />
+    <param name="name_space" type="string" value="$(arg ns)" />
+  </node>
+
+<!-- ****************************************************************************** -->
+
+    <!-- Spawn urdf into Gazebo -->
+    <node name="spawn_urdf_$(arg ns)" pkg="gazebo_ros" type="spawn_model" args="-param $(arg ns)/robot_description -urdf -model $(arg ns)_base
+        -x $(arg x0)
+        -y $(arg y0)
+        -z $(arg z0)
+        -R $(arg R0)
+        -P $(arg P0)
+        -Y $(arg Y0)"/>
+
+</launch>

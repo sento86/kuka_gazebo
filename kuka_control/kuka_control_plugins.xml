@@ -1,0 +1,9 @@
+<library path="lib/libkuka_control">
+
+  <class name="kuka_control/JointTrajectoryController" type="kuka_control::JointTrajectoryController" base_class_type="controller_interface::ControllerBase">
+    <description>
+      The JointTrajectoryController description.
+    </description>
+  </class>
+
+</library>

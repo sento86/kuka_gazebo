@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<robot name="cell" xmlns:xacro="http://ros.org/wiki/xacro">
+
+  <xacro:arg name="gazebo" default="false"/>
+
+  <!-- Cell Base URDF -->
+  <xacro:include filename="$(find kuka_control)/models/cell/cell.xacro"/>
+
+  <!-- Depth cameras -->
+  <xacro:include filename="$(find kuka_control)/models/sensors/camera.urdf.xacro" />
+
+  <!-- Car door -->
+  <xacro:include filename="$(find kuka_control)/models/car_door/car_door.urdf.xacro" />
+
+</robot>

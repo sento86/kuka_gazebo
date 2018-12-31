@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<launch>
+
+  <!-- Launch the Gazebo simulation -->
+  <include file="$(find kuka_gazebo)/launch/empty_world.launch"/>
+
+  <!-- Launch the Gazebo simulation -->
+  <include file="$(find kuka_control)/launch/robot.launch">
+    <arg name="ns" value="kr6"/>
+    <arg name="x0" value="0"/>
+    <arg name="y0" value="0"/>
+    <arg name="z0" value="0"/>
+    <arg name="R0" value="0"/>
+    <arg name="P0" value="0"/>
+    <arg name="Y0" value="0"/>
+  </include>
+
+  <!-- Launch visualization -->
+  <include file="$(find kuka_control)/launch/rviz.launch"/>
+
+  <!-- Launch the MoveIt! move group -->
+<!--  <include file="$(find kuka_control)/launch/moveit.launch"/>-->
+
+</launch>
