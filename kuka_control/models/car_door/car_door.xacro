@@ -13,6 +13,11 @@
         <geometry>
           <mesh filename="package://kuka_control/models/car_door/meshes/door_vito.stl"/>
         </geometry>
+        <!--
+        <material name="red">
+        	<color rgba="1 0 0 1"/>
+        </material>
+        -->
       </visual>
       <collision name="collision">
         <geometry>
@@ -26,7 +31,11 @@
       <parent link="${parent}" />
       <child link="${name}"/>
   </joint>
-
+<!--
+  <gazebo reference="${name}">
+    <material>Gazebo/Orange</material>
+  </gazebo>
+-->
   </xacro:macro>
 
 </robot>

@@ -353,120 +353,6 @@ Visualization Manager:
         Show Robot Visual: true
       Value: false
       Velocity_Scaling_Factor: 1
-    - Alpha: 1
-      Class: rviz/RobotModel
-      Collision Enabled: false
-      Enabled: true
-      Links:
-        All Links Enabled: true
-        Expand Joint Details: false
-        Expand Link Details: false
-        Expand Tree: false
-        Link Tree Style: Links in Alphabetic Order
-        base:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-          Value: true
-        base_link:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-        camera1_depth_frame:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-        camera1_depth_optical_frame:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-        camera1_link:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-          Value: true
-        camera1_rgb_frame:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-        camera1_rgb_optical_frame:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-        camera2_depth_frame:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-        camera2_depth_optical_frame:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-        camera2_link:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-          Value: true
-        camera2_rgb_frame:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-        camera2_rgb_optical_frame:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-        camera3_depth_frame:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-        camera3_depth_optical_frame:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-        camera3_link:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-          Value: true
-        camera3_rgb_frame:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-        camera3_rgb_optical_frame:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-        camera4_depth_frame:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-        camera4_depth_optical_frame:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-        camera4_link:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-          Value: true
-        camera4_rgb_frame:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-        camera4_rgb_optical_frame:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-        door1:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-          Value: true
-      Name: RobotModel
-      Robot Description: cell/robot_description
-      TF Prefix: cell
-      Update Interval: 0
-      Value: true
-      Visual Enabled: true
     - Alpha: 0.300000012
       Class: rviz/RobotModel
       Collision Enabled: false
@@ -753,7 +639,7 @@ Visualization Manager:
   Global Options:
     Background Color: 48; 48; 48
     Default Light: true
-    Fixed Frame: cell/base
+    Fixed Frame: world
     Frame Rate: 30
   Name: root
   Tools:

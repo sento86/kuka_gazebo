@@ -27,18 +27,6 @@
     <arg name="Y0" value="0"/>
   </include>
 
-  <!-- Launch car door -->
-  <!--<include file="$(find kuka_control)/launch/object_description.launch">
-    <arg name="ns" value="car_door"/>
-    <arg name="tf" value="car_door"/>
-    <arg name="x0" value="0"/>
-    <arg name="y0" value="0"/>
-    <arg name="z0" value="0.8"/>
-    <arg name="R0" value="0"/>
-    <arg name="P0" value="0"/>
-    <arg name="Y0" value="0"/>
-  </include>-->
-
   <!-- Launch visualization -->
   <include file="$(find kuka_control)/launch/rviz.launch"/>
 

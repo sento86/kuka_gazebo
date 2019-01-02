@@ -1,11 +1,20 @@
 <?xml version="1.0"?>
 <robot name="kuka_kr6r900sixx" xmlns:xacro="http://wiki.ros.org/xacro">
+
   <!-- Gazebo Tags -->
   <xacro:arg name="gazebo" default="true"/>
   <xacro:if value="$(arg gazebo)">
     <xacro:include filename="$(find kuka_description)/urdf/kr6r900sixx.gazebo.xacro" />
   </xacro:if>
 
+  <!-- Include Kuka KR6 model -->
   <xacro:include filename="$(find kuka_description)/urdf/kr6r900sixx.xacro" />
+  
+  <!-- Include the force-torque-sensor model -->
+  <xacro:include filename="$(find sensor_description)/urdf/ft_sensor_ati.urdf.xacro"/>
+
+  <xacro:ft_sensor_axia80 parent="tool0" name="axia80" type="axia80">
+    <origin xyz="0 0 0.015" rpy="0 0 0"/>
+  </xacro:ft_sensor_axia80>
 
 </robot>

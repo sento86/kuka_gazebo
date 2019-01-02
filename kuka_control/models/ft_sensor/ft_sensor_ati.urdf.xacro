@@ -1,0 +1,212 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://ros.org/wiki/xacro" name="ft_sensor_ati">
+
+    <!-- Include all available models -->
+    <xacro:include filename="$(find kuka_control)/urdf/models.urdf.xacro"/>
+    <!--<xacro:include filename="$(find kuka_control)/urdf/ft_sensor.gazebo.xacro"/>-->
+    <xacro:include filename="$(find kuka_control)/urdf/ft_sensor_ati.gazebo.xacro"/>
+
+    <!-- Base model for all sensor to have common frame names -->
+    <xacro:macro name="ft_sensor_nano17" params="parent name type *origin">
+
+    <joint name="${name}_base_joint" type="fixed">
+	<xacro:insert_block name="origin"/>
+	<parent link="${parent}"/>
+	<child link="${name}_ft_base"/>
+    </joint>
+
+    <link name="${name}_ft_base">
+	<xacro:insert_block name="nano17"/>
+    </link>
+
+    <joint name="${name}_measure_joint" type="revolute">
+	<xacro:insert_block name="nano17_measure_frame"/>
+	<parent link="${name}_ft_base"/>
+	<child link="${name}_ft_measure"/>
+	<limit lower="0" upper="0" effort="20000" velocity="20000"/>
+	<axis xyz="0 0 1" />
+    </joint>
+    <!--<joint name="${name}_measure_joint" type="fixed">
+	<xacro:insert_block name="nano17_measure_frame"/>
+	<parent link="${name}_ft_base"/>
+	<child link="${name}_ft_measure"/>
+    </joint>-->
+
+    <link name="${name}_ft_measure">
+        <xacro:insert_block name="nano17_platform"/>
+    </link>
+
+    <transmission name="${name}_tran_ft">
+      <type>transmission_interface/SimpleTransmission</type>
+      <joint name="${name}_measure_joint">
+        <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+      </joint>
+      <actuator name="${name}_motor_ft">
+        <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+        <mechanicalReduction>1</mechanicalReduction>
+      </actuator>
+    </transmission>
+
+    <xacro:ft_sensor_gazebo name="${name}" parent="${parent}" type="${type}"/>
+
+    </xacro:macro>
+
+    <!-- Base model for all sensor to have common frame names -->
+    <xacro:macro name="ft_sensor_axia80" params="parent name type *origin">
+
+    <joint name="${name}_base_joint" type="fixed">
+	<xacro:insert_block name="origin"/>
+	<parent link="${parent}"/>
+	<child link="${name}_ft_base"/>
+    </joint>
+
+    <link name="${name}_ft_base">
+	<xacro:insert_block name="axia80"/>
+    </link>
+
+    <joint name="${name}_measure_joint" type="revolute">
+	<xacro:insert_block name="axia80_measure_frame"/>
+	<parent link="${name}_ft_base"/>
+	<child link="${name}_ft_measure"/>
+	<limit lower="0" upper="0" effort="20000" velocity="20000"/>
+	<axis xyz="0 0 1" />
+    </joint>
+
+    <link name="${name}_ft_measure">
+        <xacro:insert_block name="axia80_platform"/>
+    </link>
+
+    <transmission name="${name}_tran_ft">
+      <type>transmission_interface/SimpleTransmission</type>
+      <joint name="${name}_measure_joint">
+        <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+      </joint>
+      <actuator name="${name}_motor_ft">
+        <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+        <mechanicalReduction>1</mechanicalReduction>
+      </actuator>
+    </transmission>
+
+    <xacro:ft_sensor_gazebo name="${name}" parent="${parent}" type="${type}"/>
+
+    </xacro:macro>
+
+    <!-- Base model for all sensor to have common frame names -->
+    <xacro:macro name="ft_sensor_mini45" params="parent name type *origin">
+
+    <joint name="${name}_base_joint" type="fixed">
+	<xacro:insert_block name="origin"/>
+	<parent link="${parent}"/>
+	<child link="${name}_ft_base"/>
+    </joint>
+
+    <link name="${name}_ft_base">
+	<xacro:insert_block name="mini45"/>
+    </link>
+
+    <joint name="${name}_measure_joint" type="revolute">
+	<xacro:insert_block name="mini45_measure_frame"/>
+	<parent link="${name}_ft_base"/>
+	<child link="${name}_ft_measure"/>
+	<limit lower="0" upper="0" effort="20000" velocity="20000"/>
+	<axis xyz="0 0 1" />
+    </joint>
+
+    <link name="${name}_ft_measure">
+        <xacro:insert_block name="mini45_platform"/>
+    </link>
+
+    <transmission name="${name}_tran_ft">
+      <type>transmission_interface/SimpleTransmission</type>
+      <joint name="${name}_measure_joint">
+        <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+      </joint>
+      <actuator name="${name}_motor_ft">
+        <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+        <mechanicalReduction>1</mechanicalReduction>
+      </actuator>
+    </transmission>
+
+    <xacro:ft_sensor_gazebo name="${name}" parent="${parent}" type="${type}"/>
+
+    </xacro:macro>
+
+    <!-- Base model for all sensor to have common frame names -->
+    <xacro:macro name="ft_sensor_ft45" params="parent name type *origin">
+
+    <joint name="${name}_base_joint" type="fixed">
+	<xacro:insert_block name="origin"/>
+	<parent link="${parent}"/>
+	<child link="${name}_ft_base"/>
+    </joint>
+
+    <link name="${name}_ft_base">
+	<xacro:insert_block name="ft45"/>
+    </link>
+
+    <joint name="${name}_measure_joint" type="revolute">
+	<xacro:insert_block name="ft45_measure_frame"/>
+	<parent link="${name}_ft_base"/>
+	<child link="${name}_ft_measure"/>
+	<limit lower="0" upper="0" effort="20000" velocity="20000"/>
+	<axis xyz="0 0 1" />
+    </joint>
+
+    <link name="${name}_ft_measure">
+        <xacro:insert_block name="ft45_platform"/>
+    </link>
+
+    <transmission name="${name}_tran_ft">
+      <type>transmission_interface/SimpleTransmission</type>
+      <joint name="${name}_measure_joint">
+        <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+      </joint>
+      <actuator name="${name}_motor_ft">
+        <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+        <mechanicalReduction>1</mechanicalReduction>
+      </actuator>
+    </transmission>
+
+    <xacro:ft_sensor_gazebo name="${name}" parent="${parent}" type="${type}"/>
+
+    </xacro:macro>
+
+    <!-- Base model for all sensor to have common frame names -->
+    <xacro:macro name="ft_sensor_iit" params="parent name type *origin">
+
+    <joint name="${name}_base_joint" type="fixed">
+	<xacro:insert_block name="origin"/>
+	<parent link="${parent}"/>
+	<child link="${name}_ft_base"/>
+    </joint>
+
+    <link name="${name}_ft_base">
+	<xacro:insert_block name="ft45"/>
+    </link>
+
+    <joint name="${name}_measure_joint" type="fixed">
+	<xacro:insert_block name="ft45_measure_frame"/>
+	<parent link="${name}_ft_base"/>
+	<child link="${name}_ft_measure"/>
+    </joint>
+
+    <link name="${name}_ft_measure">
+        <xacro:insert_block name="ft45_platform"/>
+    </link>
+
+    <transmission name="${name}_tran_ft">
+      <type>transmission_interface/SimpleTransmission</type>
+      <joint name="${name}_measure_joint">
+        <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+      </joint>
+      <actuator name="${name}_motor_ft">
+        <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+        <mechanicalReduction>1</mechanicalReduction>
+      </actuator>
+    </transmission>
+
+    <xacro:ft_sensor_gazebo name="${name}" parent="${parent}" type="${type}"/>
+
+    </xacro:macro>
+
+</robot>

@@ -1,0 +1,207 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://ros.org/wiki/xacro">
+
+	<!-- Common tools: PI, inertias of a cuboid and cylinder -->
+	<xacro:property name="M_PI" value="3.1415926535897931"/>
+	<xacro:macro name="cuboid_inertia_def" params="width height length mass">
+	<inertia ixx="${mass * (height * height + length * length) / 12}"
+		 iyy="${mass * (width * width + length * length) / 12}"
+		 izz="${mass * (width * width + height * height) / 12}"
+		 ixy="0" iyz="0" ixz="0"/>
+	</xacro:macro>
+	<xacro:macro name="cylinder_inertia_def" params="radius length mass">
+	<inertia ixx="${mass * radius* radius / 2}"
+		 iyy="${mass * radius* radius / 2}"
+		 izz="${mass * (3 * radius * radius + length * length) / 12}"
+		 ixy="0" iyz="0" ixz="0"/>
+	</xacro:macro>
+
+	<!-- ############# -->
+	<!-- Sensor models -->
+	<!-- ############# -->
+
+	<!-- Nano17: http://www.ati-ia.com/products/ft/ft_models.aspx?id=Nano17 -->
+	<xacro:property name="nano17">
+			<inertial>
+				<mass value="0.00907"/>
+				<origin xyz="0 0 0.00725"  />
+				<xacro:cylinder_inertia_def radius="0.085" length="0.0145" mass="0.00907"/>
+			</inertial>
+			<visual>
+				<!-- origin xyz="0 0 0.00725" rpy="0 0 0"/ -->
+				<origin xyz="0 0 0" rpy="0 0 0"/>
+				<geometry>
+					<!-- cylinder radius="0.0085" length="0.0145"/ -->
+					<mesh filename="package://kuka_control/meshes/nano17a.stl"/>
+				</geometry>
+			</visual>
+			<collision>
+				<origin xyz="0 0 0.00725" rpy="0 0 0"/>
+				<geometry>
+					<cylinder radius="0.0085" length="0.0145"/>
+				</geometry>
+			</collision>
+	</xacro:property>
+	<xacro:property name="nano17_platform">
+			<inertial>
+				<mass value="0.002"/>
+				<origin xyz="0 0 0.0025"  />
+				<xacro:cylinder_inertia_def radius="0.085" length="0.005" mass="0.002"/>
+			</inertial>
+			<visual>
+				<!-- origin xyz="0 0 0.00725" rpy="0 0 0"/ -->
+				<origin xyz="0 0 0.0025" rpy="0 0 0"/>
+				<geometry>
+					<cylinder radius="0.0085" length="0.005"/>
+				</geometry>
+			</visual>
+			<collision>
+				<origin xyz="0 0 0.0025" rpy="0 0 0"/>
+				<geometry>
+					<cylinder radius="0.0085" length="0.005"/>
+				</geometry>
+			</collision>
+	</xacro:property>
+	<xacro:property name="nano17_measure_frame">
+		<origin xyz="0 0 0.0145" rpy="0 0 0"/>
+	</xacro:property>
+
+
+	<!-- Axia80: http://www.ati-ia.com/products/ft/ft_models.aspx?id=Axia80 -->
+	<xacro:property name="axia80">
+		<inertial>
+			<mass value="0.3"/>
+			<origin xyz="0 0 0.0125"  />
+			<xacro:cylinder_inertia_def radius="0.041" length="0.025" mass="0.3"/>
+		</inertial>
+		<visual>
+			<origin xyz="0 0 0.0125" rpy="0 0 0"/>
+			<geometry>
+				<!-- <cylinder radius="0.041" length="0.025"/> -->
+				<mesh filename="package://kuka_control/meshes/axia80.dae"/>
+			</geometry>
+		</visual>
+		<collision>
+			<origin xyz="0 0 0.0125" rpy="0 0 0"/>
+			<geometry>
+				<cylinder radius="0.041" length="0.025"/>
+			</geometry>
+		</collision>
+	</xacro:property>
+	<xacro:property name="axia80_platform">
+		<inertial>
+			<mass value="0.1"/>
+			<origin xyz="0 0 0.0125"  />
+			<xacro:cylinder_inertia_def radius="0.041" length="0.005" mass="0.1"/>
+		</inertial>
+		<visual>
+			<origin xyz="0 0 0.0125" rpy="0 0 0"/>
+			<geometry>
+				<cylinder radius="0.041" length="0.005"/>
+			</geometry>
+		</visual>
+		<collision>
+			<origin xyz="0 0 0.0125" rpy="0 0 0"/>
+			<geometry>
+				<cylinder radius="0.041" length="0.005"/>
+			</geometry>
+		</collision>
+	</xacro:property>
+	<xacro:property name="axia80_measure_frame">
+		<origin xyz="0 0 0.0125" rpy="0 0 0"/>
+	</xacro:property>
+
+
+	<!-- Mini45: http://www.ati-ia.com/products/ft/ft_models.aspx?id=Mini45 -->
+	<xacro:property name="mini45">
+		<inertial>
+			<mass value="0.0917"/>
+			<origin xyz="0 0 0.00785"  />
+			<xacro:cylinder_inertia_def radius="0.0225" length="0.0157" mass="0.0917"/>
+		</inertial>
+		<visual>
+			<!--<origin xyz="0 0 0.00785" rpy="0 0 0"/>
+			<geometry>
+				<cylinder radius="0.0225" length="0.0157"/>
+			</geometry>-->
+			<origin xyz="0 0 0" rpy="0 0 0"/>
+			<geometry>
+				<mesh filename="package://kuka_control/meshes/mini45.dae"/>
+			</geometry>
+		</visual>
+		<collision>
+			<origin xyz="0 0 0.00785" rpy="0 0 0"/>
+			<geometry>
+				<cylinder radius="0.0225" length="0.0157"/>
+			</geometry>
+		</collision>
+	</xacro:property>
+	<xacro:property name="mini45_platform">
+		<inertial>
+			<mass value="0.1"/>
+			<origin xyz="0 0 0.001"  />
+			<xacro:cylinder_inertia_def radius="0.0225" length="0.002" mass="1.0"/> <!-- fake mass to improve inertia stability -->
+		</inertial>
+		<visual>
+			<origin xyz="0 0 0.001" rpy="0 0 0"/>
+			<geometry>
+				<cylinder radius="0.0225" length="0.002"/>
+			</geometry>
+		</visual>
+		<collision>
+			<origin xyz="0 0 0.001" rpy="0 0 0"/>
+			<geometry>
+				<cylinder radius="0.0225" length="0.002"/>
+			</geometry>
+		</collision>
+	</xacro:property>
+	<xacro:property name="mini45_measure_frame">
+		<origin xyz="0 0 0.0157" rpy="0 0 0"/>
+	</xacro:property>
+
+
+	<!-- FTiCub: http://wiki.icub.org/wiki/FT_sensor -->
+	<xacro:property name="ft45">
+		<inertial>
+			<mass value="0.122"/>
+			<origin xyz="0 0 0.00902"  />
+			<xacro:cylinder_inertia_def radius="0.0225" length="0.0184" mass="0.122"/>
+		</inertial>
+		<visual>
+			<origin xyz="0 0 0.0134" rpy="${M_PI} 0 ${M_PI/2}"/>
+			<geometry>
+				<mesh filename="package://kuka_control/meshes/ftsensor45a.dae"/>
+			</geometry>
+		</visual>
+		<collision>
+			<origin xyz="0 0 0.00902" rpy="0 0 0"/>
+			<geometry>
+				<cylinder radius="0.0225" length="0.0184"/>
+			</geometry>
+		</collision>
+	</xacro:property>
+	<xacro:property name="ft45_platform">
+		<inertial>
+			<mass value="0.01"/>
+			<origin xyz="0 0 -0.00225"  />
+			<xacro:cylinder_inertia_def radius="0.0225" length="0.005" mass="1.0"/>
+		</inertial>
+		<visual>
+			<origin xyz="0 0 -0.00225" rpy="0 0 0"/>
+			<geometry>
+				<cylinder radius="0.0225" length="0.005"/>
+			</geometry>
+		</visual>
+		<collision>
+			<origin xyz="0 0 -0.00225" rpy="0 0 0"/>
+			<geometry>
+				<cylinder radius="0.0225" length="0.005"/>
+			</geometry>
+		</collision>
+	</xacro:property>
+	<xacro:property name="ft45_measure_frame">
+		<origin xyz="0 0 0.0184" rpy="0 0 0"/>
+	</xacro:property>
+
+
+</robot>
