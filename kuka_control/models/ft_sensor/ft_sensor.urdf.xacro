@@ -2,8 +2,8 @@
 <robot xmlns:xacro="http://ros.org/wiki/xacro" name="ft_sensor">
 
     <!-- Include all available models -->
-    <xacro:include filename="$(find kuka_control)/urdf/models.urdf.xacro"/>
-    <xacro:include filename="$(find kuka_control)/urdf/ft_sensor.gazebo.xacro"/>
+    <xacro:include filename="$(find kuka_control)/models/ft_sensor/models.urdf.xacro"/>
+    <xacro:include filename="$(find kuka_control)/models/ft_sensor/ft_sensor.gazebo.xacro"/>
 
     <!-- Base model for all sensor to have common frame names -->
     <xacro:macro name="ft_sensor" params="parent name type *origin">

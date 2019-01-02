@@ -32,7 +32,7 @@
 				<origin xyz="0 0 0" rpy="0 0 0"/>
 				<geometry>
 					<!-- cylinder radius="0.0085" length="0.0145"/ -->
-					<mesh filename="package://kuka_control/meshes/nano17a.stl"/>
+					<mesh filename="package://kuka_control/models/ft_sensor/meshes/nano17a.stl"/>
 				</geometry>
 			</visual>
 			<collision>
@@ -78,7 +78,7 @@
 			<origin xyz="0 0 0.0125" rpy="0 0 0"/>
 			<geometry>
 				<!-- <cylinder radius="0.041" length="0.025"/> -->
-				<mesh filename="package://kuka_control/meshes/axia80.dae"/>
+				<mesh filename="package://kuka_control/models/ft_sensor/meshes/axia80.dae"/>
 			</geometry>
 		</visual>
 		<collision>
@@ -126,7 +126,7 @@
 			</geometry>-->
 			<origin xyz="0 0 0" rpy="0 0 0"/>
 			<geometry>
-				<mesh filename="package://kuka_control/meshes/mini45.dae"/>
+				<mesh filename="package://kuka_control/models/ft_sensor/meshes/mini45.dae"/>
 			</geometry>
 		</visual>
 		<collision>
@@ -170,7 +170,7 @@
 		<visual>
 			<origin xyz="0 0 0.0134" rpy="${M_PI} 0 ${M_PI/2}"/>
 			<geometry>
-				<mesh filename="package://kuka_control/meshes/ftsensor45a.dae"/>
+				<mesh filename="package://kuka_control/models/ft_sensor/meshes/ftsensor45a.dae"/>
 			</geometry>
 		</visual>
 		<collision>

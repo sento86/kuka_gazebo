@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<robot name="cell" xmlns:xacro="http://ros.org/wiki/xacro">
+
+  <xacro:arg name="gazebo" default="false"/>
+
+  <!-- Depth cameras -->
+  <xacro:include filename="$(find kuka_control)/models/tool/tool.xacro" />
+
+  <!-- Kinect sensor (k1) -->
+  <xacro:tool name="tool" parent="base_link">
+      <origin xyz="0.0 0.0 0.0" rpy="0 0 0" />
+  </xacro:tool>
+
+</robot>
