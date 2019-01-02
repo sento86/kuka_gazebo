@@ -4,17 +4,18 @@
     <xacro:property name="M_PI" value="3.1415926535897931" />
 
     <xacro:macro name="tool" params="name parent *origin">
-      <joint name="${name}_joint" type="fixed">
+    
+      <joint name="${name}_base_joint" type="fixed">
         <xacro:insert_block name="origin" />
         <parent link="${parent}"/>
-        <child link="${name}_link"/>
+        <child link="${name}_base"/>
       </joint>
 
-      <link name="${name}_link">
+      <!--<link name="${name}_link">
         <inertial>
           <mass value="0.1" />
           <origin xyz="0 0 0" rpy="0 0 0" />
-          <inertia ixx="0.01" ixy="0" ixz="0" iyy="0.01" iyz="0" izz="0.01" />
+          <inertia ixx="0.0001" ixy="0" ixz="0" iyy="0.0001" iyz="0" izz="0.0001" />
         </inertial>
         <visual>
           <origin xyz="0 0 0" rpy="0 0 0" />
@@ -28,7 +29,63 @@
             <mesh filename="package://kuka_control/models/tool/meshes/Tool.dae"/>
           </geometry>
         </collision>
+      </link>-->
+      
+      <link name="${name}_base">
+        <inertial>
+          <mass value="0.005" />
+          <origin xyz="0 0 0" rpy="0 0 0" />
+          <inertia ixx="0.0001" ixy="0" ixz="0" iyy="0.0001" iyz="0" izz="0.0001" />
+        </inertial>
+        <visual>
+          <origin xyz="0 0 0" rpy="0 0 0" />
+          <geometry>
+            <mesh filename="package://kuka_control/models/tool/meshes/Tool_base.dae"/>
+          </geometry>
+        </visual>
+        <collision>
+          <origin xyz="0 0 0" rpy="0 0 0" />
+          <geometry>
+            <mesh filename="package://kuka_control/models/tool/meshes/Tool_base.dae"/>
+          </geometry>
+        </collision>
       </link>
+      
+      <joint name="${name}_tip_joint" type="fixed">
+        <origin xyz="0 0 0" rpy="0 0 0" />
+        <parent link="${name}_base"/>
+        <child link="${name}_tip"/>
+      </joint>
+      
+      <link name="${name}_tip">
+        <inertial>
+          <mass value="0.0005" />
+          <origin xyz="0 0 0" rpy="0 0 0" />
+          <inertia ixx="0.00001" ixy="0" ixz="0" iyy="0.00001" iyz="0" izz="0.00001" />
+        </inertial>
+        <visual>
+          <origin xyz="0 0 0" rpy="0 0 0" />
+          <geometry>
+            <mesh filename="package://kuka_control/models/tool/meshes/Tool_tip.dae"/>
+          </geometry>
+        </visual>
+        <collision>
+          <origin xyz="0 0 0" rpy="0 0 0" />
+          <geometry>
+            <mesh filename="package://kuka_control/models/tool/meshes/Tool_tip.dae"/>
+          </geometry>
+        </collision>
+      </link>
+
+      <gazebo reference="${name}_tip">
+        <turnGravityOff>true</turnGravityOff>
+        <selfCollide>true</selfCollide>
+        <mu1 value="0.01" />
+        <mu2 value="0.01" />
+        <kp  value="100" />
+        <kd  value="0.1" />
+        <material>Gazebo/Grey</material>
+      </gazebo>
 
     </xacro:macro>
   </robot>

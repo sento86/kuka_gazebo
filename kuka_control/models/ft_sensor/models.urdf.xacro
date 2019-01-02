@@ -70,9 +70,10 @@
 	<!-- Axia80: http://www.ati-ia.com/products/ft/ft_models.aspx?id=Axia80 -->
 	<xacro:property name="axia80">
 		<inertial>
-			<mass value="0.3"/>
+			<!--<mass value="0.3"/>-->
+			<mass value="0.01"/>
 			<origin xyz="0 0 0.0125"  />
-			<xacro:cylinder_inertia_def radius="0.041" length="0.025" mass="0.3"/>
+			<xacro:cylinder_inertia_def radius="0.041" length="0.025" mass="0.01"/>
 		</inertial>
 		<visual>
 			<origin xyz="0 0 0.0125" rpy="0 0 0"/>
@@ -90,16 +91,16 @@
 	</xacro:property>
 	<xacro:property name="axia80_platform">
 		<inertial>
-			<mass value="0.1"/>
+			<mass value="0.005"/>
 			<origin xyz="0 0 0.0125"  />
-			<xacro:cylinder_inertia_def radius="0.041" length="0.005" mass="0.1"/>
+			<xacro:cylinder_inertia_def radius="0.041" length="0.005" mass="0.005"/>
 		</inertial>
-		<visual>
+		<!--<visual>
 			<origin xyz="0 0 0.0125" rpy="0 0 0"/>
 			<geometry>
 				<cylinder radius="0.041" length="0.005"/>
 			</geometry>
-		</visual>
+		</visual>-->
 		<collision>
 			<origin xyz="0 0 0.0125" rpy="0 0 0"/>
 			<geometry>

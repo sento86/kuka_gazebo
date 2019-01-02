@@ -15,12 +15,12 @@ position_trajectory_controller:
     - joint_a6
 
   gains:
-    joint_a1: {p: 10, d: 1, i: 0.1}
-    joint_a2: {p: 10, d: 1, i: 0.1}
-    joint_a3: {p: 10, d: 1, i: 0.1}
-    joint_a4: {p: 10, d: 1, i: 0.1}
-    joint_a5: {p: 10, d: 1, i: 0.1}
-    joint_a6: {p: 10, d: 1, i: 0.1}
+    joint_a1: {p: 100, d: 1, i: 0.1}
+    joint_a2: {p: 100, d: 1, i: 0.1}
+    joint_a3: {p: 100, d: 1, i: 0.1}
+    joint_a4: {p: 100, d: 1, i: 0.1}
+    joint_a5: {p: 100, d: 1, i: 0.1}
+    joint_a6: {p: 100, d: 1, i: 0.1}
 
 
   state_publish_rate: 50 # Defaults to 50
