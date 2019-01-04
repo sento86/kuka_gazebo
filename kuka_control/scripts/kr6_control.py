@@ -32,8 +32,9 @@ class KR6control:
     def __init__(self):
 
         self.ns='kr6'
-        self.pubTrajectory = rospy.Publisher("/position_trajectory_controller/command", JointTrajectory, queue_size=1)
-        self.pubTrajectoryNS = rospy.Publisher(self.ns+"/position_trajectory_controller/command", JointTrajectory, queue_size=1)
+        self.pubTrajectory_ = rospy.Publisher("/position_trajectory_controller/command", JointTrajectory, queue_size=1)
+        self.pubTrajectory = rospy.Publisher(self.ns+"/position_trajectory_controller/command", JointTrajectory, queue_size=1)
+        self._cbJointState = rospy.Subscriber(self.ns+"/joint_states", JointState, self.callback_joint_states, queue_size=1)
         self._cbCmdJoy = rospy.Subscriber("joy", Joy, self.callback_cmd_joy, queue_size=1)
         self._cbCmdJoint = rospy.Subscriber(self.ns+"/cmd_joint", JointState, self.callback_cmd_joint, queue_size=1)
 
@@ -70,6 +71,10 @@ class KR6control:
         #self.trajectory.points.append(JointTrajectoryPoint(positions = np.array([0.0,-1.57,1.57,-0.0,-1.57,-0.0]), time_from_start = rospy.Duration(1.0,0.0)))
         self.trajectory.points.append(JointTrajectoryPoint(positions = self.joint_positions, time_from_start = rospy.Duration(0,500000000)))
         
+    def callback_joint_states(self, data):
+        self._joint_states = data
+        #print self._joint_states
+        
     def callback_cmd_joy(self, data):
         self._cmd_joy = data
         #print(self._joy)
@@ -102,7 +107,50 @@ class KR6control:
         #if (self.q1!=0.0 or self.q2!=0.0 or self.q3!=0.0 or self.q4!=0.0 or self.q5!=0.0 or self.q6!=0.0):
         if (math.fabs(self.q1)>0.01 or math.fabs(self.q2)>0.01 or math.fabs(self.q3)>0.01 or math.fabs(self.q4)>0.01 or math.fabs(self.q5)>0.01 or math.fabs(self.q6)>0.01):
             self.new_cmd_joint = True
-            self.record_pose = True
+            #self.record_pose = True
+        
+    def callback_cmd_vel(self, data):
+        self._cmd_vel = data
+        #print(self._cmd_vel)
+        # Set cartesian velocities
+        self.vx = self._cmd_vel.twist.linear.x
+        self.vy = self._cmd_vel.twist.linear.y
+        self.vz = self._cmd_vel.twist.linear.z
+        self.wx = self._cmd_vel.twist.angular.x
+        self.wy = self._cmd_vel.twist.angular.y
+        self.wz = self._cmd_vel.twist.angular.z
+        
+#         self.local_rotation = quaternion_from_euler(self.wx, self.wy, self.wz)
+#         current_pose_msg = self.get_pose_msg(self._limb.endpoint_pose()) 
+#         self.current_orientation = [current_pose_msg.orientation.w,
+#                                     current_pose_msg.orientation.x, 
+#                                     current_pose_msg.orientation.y, 
+#                                     current_pose_msg.orientation.z]
+#         self.global_angular_velocity = self.current_orientation * self.local_rotation
+#         
+#         #self.wx = self.global_angular_velocity[0]
+#         #self.wy = self.global_angular_velocity[1]
+#         #self.wz = self.global_angular_velocity[2]
+        
+        # Reset angular velocities
+        self.q1 = 0.0 # joint_a1
+        self.q2 = 0.0 # joint_a2
+        self.q3 = 0.0 # joint_a3
+        self.q4 = 0.0 # joint_a4
+        self.q5 = 0.0 # joint_a5
+        self.q6 = 0.0 # joint_a6
+        # Reset cartesian pose
+        self.dx = 0.0
+        self.dy = 0.0
+        self.dz = 0.0
+        self.dR = 0.0
+        self.dP = 0.0
+        self.dY = 0.0
+        # Set new_cmd_vel as true
+        #if (self.vx!=0.0 or self.vy!=0.0 or self.vz!=0.0 or self.wx!=0.0 or self.wy!=0.0 or self.wz!=0.0):
+        if (math.fabs(self.vx)>0.01 or math.fabs(self.vy)>0.01 or math.fabs(self.vz)>0.01 or math.fabs(self.wx)>0.01 or math.fabs(self.wy)>0.01 or math.fabs(self.wz)>0.01):
+            self.new_cmd_vel = True
+            #self.record_pose = True
 
     def loop(self, fc = 100.0):
         
@@ -128,8 +176,8 @@ class KR6control:
             #self.trajectory.points[0] = JointTrajectoryPoint(positions = np.array([j1,j2,j3,j4,j5,j6]), time_from_start = rospy.Duration(0,500000000))
             self.trajectory.points[0] = JointTrajectoryPoint(positions = self.joint_positions, time_from_start = rospy.Duration(0,500000000))
         
-            self.pubTrajectory.publish(self.trajectory)
-            self.pubTrajectoryNS.publish(self.trajectory)
+            self.pubTrajectory.publish(self.trajectory) # KR6 (simulated)
+            self.pubTrajectory_.publish(self.trajectory) # KR6 (real)
             rate.sleep() # Sleeps for 1/rate sec
             
             #rospy.spin()
