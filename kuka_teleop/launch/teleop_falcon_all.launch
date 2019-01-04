@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<launch>
+
+    <arg name="limb" default=""/>
+
+    <!-- Falcon node -->
+    <include file="$(find falcon_joystick)/launch/follower.launch"/>
+
+    <!-- Teleoperation node --> 
+    <node pkg="baxter_teleop" type="baxter_falcon_all" name="baxter_teleop_$(arg limb)" output="screen">
+      <!-- Axis and buttons parameters -->
+      <rosparam file="$(find baxter_teleop)/config/falcon_all.yaml" command="load" />
+      <!-- Twist msg name -->
+      <param name="cmd_vel_topic" value="$(arg limb)/cmd_vel" type="string"/>
+      <param name="cmd_vel_stmp_topic" value="$(arg limb)/cmd_vel/stamped" type="string"/>
+      <param name="cmd_pose_topic" value="$(arg limb)/cmd_pose" type="string"/>
+      <param name="cmd_pose_stmp_topic" value="$(arg limb)/cmd_pose/stamped" type="string"/>
+      <param name="deadman_no_publish" value="false" type="bool"/>
+      <!-- Remap joystick message -->
+      <remap from="/joy" to="/follower/joystick" />
+    </node>
+
+</launch>
+

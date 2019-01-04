@@ -1,0 +1,2 @@
+# Timeout for joystick reset (<0 no timeout)
+joy_msg_timeout: -1

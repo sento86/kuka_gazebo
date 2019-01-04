@@ -1,0 +1,34 @@
+<?xml version="1.0"?>
+<launch>
+
+    <arg name="limb" default=""/>
+    <arg name="sim" default="false"/>
+    <arg name="control" default="joint"/> <!-- joint/cartesian -->
+    <arg name="feedback" default="true"/>
+
+    <!-- Phantom node -->
+    <include file="$(find omni_common)/launch/omni_new.launch"/>
+
+    <!-- Teleoperation node --> 
+    <node pkg="baxter_teleop" type="baxter_phantom" name="baxter_teleop_$(arg limb)" output="screen">
+      <!-- Axis and buttons parameters -->
+      <rosparam file="$(find baxter_teleop)/config/phantom.yaml" command="load" />
+      <!-- Twist msg name -->
+      <param name="cmd_vel_topic" value="$(arg limb)/cmd_vel" type="string"/>
+      <param name="cmd_pose_topic" value="$(arg limb)/cmd_pose" type="string"/>
+      <param name="cmd_joint_topic" value="$(arg limb)/cmd_joint/phantom" type="string"/>
+      <param name="cmd_gripper_topic" value="$(arg limb)/cmd_gripper" type="string"/>
+      <param name="haptic_topic" value="phantom/force_feedback" type="string"/>
+      <param name="lock_topic" value="phantom/lock" type="string"/>
+      <param name="deadman_no_publish" value="false" type="bool"/>
+      <param name="limb" value="$(arg limb)" type="string"/>
+      <param name="sim" value="$(arg sim)" type="bool"/>
+      <param name="control" value="$(arg control)" type="string"/>
+      <param name="feedback" value="$(arg feedback)" type="bool"/>
+      <!-- Remap FT-sensor message -->
+      <remap from="$(arg limb)/ft_sensor" to="$(arg limb)/ft_sensor_topic" if="$(arg sim)"/>
+      <remap from="$(arg limb)/ft_sensor" to="$(arg limb)/ft_sensor/global/weightless" unless="$(arg sim)"/>
+    </node>
+
+</launch>
+

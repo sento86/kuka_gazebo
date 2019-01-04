@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<launch>
+
+    <arg name="limb" default=""/>
+
+    <!-- Xsens node -->
+    <!--<include file="$(find mtig_driver)/launch/demo_mtw_driver.launch"/>-->
+    <include file="$(find mtig_driver)/launch/mtw_driver.launch"/>
+
+    <!-- Teleoperation node --> 
+    <node pkg="baxter_teleop" type="baxter_xsens" name="baxter_teleop_$(arg limb)" output="screen">
+      <!-- Axis and buttons parameters -->
+      <rosparam file="$(find baxter_teleop)/config/xsens.yaml" command="load" />
+      <!-- Twist msg name -->
+      <param name="cmd_vel_topic" value="$(arg limb)/cmd_vel" type="string"/>
+      <param name="cmd_vel_stmp_topic" value="$(arg limb)/cmd_vel/stamped" type="string"/>
+      <param name="cmd_pose_topic" value="$(arg limb)/cmd_pose" type="string"/>
+      <param name="cmd_pose_stmp_topic" value="$(arg limb)/cmd_pose/stamped" type="string"/>
+      <param name="deadman_no_publish" value="false" type="bool"/>
+      <!-- Remap IMU message -->
+      <remap from="/imu" to="/mtw_driver/imu/right_wrist" />
+      <!-- Parameters for filters -->
+      <rosparam command="load" file="$(find baxter_teleop)/launch/filter_transfer_function.yaml"/>
+    </node>
+
+</launch>
+

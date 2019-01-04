@@ -1,0 +1,6 @@
+LowPassSingle:
+  name: transferfunction_test
+  type: SingleChannelTransferFunctionFilter<double>
+  params:
+    a: [1.0, -0.509525449494429]
+    b: [0.245237275252786, 0.245237275252786]
