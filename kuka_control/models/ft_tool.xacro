@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+<robot name="ft_tool" xmlns:xacro="http://wiki.ros.org/xacro">
+
+  <!-- Include brida model -->
+  <xacro:include filename="$(find kuka_control)/models/brida/brida.xacro"/>
+
+  <xacro:brida parent="tool0" name="brida">
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+  </xacro:brida>
+  
+  <!-- Include the force-torque-sensor model -->
+  <xacro:include filename="$(find kuka_control)/models/ft_sensor/ft_sensor_ati.urdf.xacro"/>
+
+  <xacro:ft_sensor_axia80 parent="brida_link" name="axia80" type="axia80">
+    <origin xyz="0 0 0.019" rpy="0 0 0"/>
+  </xacro:ft_sensor_axia80>
+  
+  <!-- Include tool model -->
+  <xacro:include filename="$(find kuka_control)/models/tool/tool.xacro"/>
+
+  <xacro:tool parent="axia80_ft_measure" name="tool">
+    <origin xyz="0 0 0.013" rpy="0 0 0"/>
+  </xacro:tool>
+
+</robot>

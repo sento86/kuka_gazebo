@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<launch>
+
+  <!-- Launch Kuka Agilus KR6 -->
+  <include file="$(find kuka_control)/launch/robot_real.launch">
+    <arg name="ns" value=""/>
+    <arg name="x0" value="0"/>
+    <arg name="y0" value="0"/>
+    <arg name="z0" value="2"/>
+    <arg name="R0" value="3.1416"/>
+    <arg name="P0" value="0"/>
+    <arg name="Y0" value="0"/>
+  </include>
+
+  <!-- Launch the MoveIt! move group -->
+<!--  <include file="$(find kuka_control)/launch/moveit.launch"/>-->
+
+</launch>

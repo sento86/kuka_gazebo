@@ -71,9 +71,9 @@
 	<xacro:property name="axia80">
 		<inertial>
 			<!--<mass value="0.3"/>-->
-			<mass value="0.01"/>
+			<mass value="0.00001"/>
 			<origin xyz="0 0 0.0125"  />
-			<xacro:cylinder_inertia_def radius="0.041" length="0.025" mass="0.01"/>
+			<xacro:cylinder_inertia_def radius="0.041" length="0.025" mass="0.00001"/>
 		</inertial>
 		<visual>
 			<origin xyz="0 0 0.0125" rpy="0 0 0"/>
@@ -91,9 +91,9 @@
 	</xacro:property>
 	<xacro:property name="axia80_platform">
 		<inertial>
-			<mass value="0.005"/>
+			<mass value="0.00001"/>
 			<origin xyz="0 0 0.0125"  />
-			<xacro:cylinder_inertia_def radius="0.041" length="0.005" mass="0.005"/>
+			<xacro:cylinder_inertia_def radius="0.041" length="0.005" mass="0.00001"/>
 		</inertial>
 		<!--<visual>
 			<origin xyz="0 0 0.0125" rpy="0 0 0"/>

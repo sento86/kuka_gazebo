@@ -10,18 +10,7 @@
   <!-- Include Kuka KR6 model -->
   <xacro:include filename="$(find kuka_description)/urdf/kr6r900sixx.xacro" />
   
-  <!-- Include the force-torque-sensor model -->
-  <xacro:include filename="$(find kuka_control)/models/ft_sensor/ft_sensor_ati.urdf.xacro"/>
-
-  <xacro:ft_sensor_axia80 parent="tool0" name="axia80" type="axia80">
-    <origin xyz="0 0 0.015" rpy="0 0 0"/>
-  </xacro:ft_sensor_axia80>
-  
-  <!-- Include tool model -->
-  <xacro:include filename="$(find kuka_control)/models/tool/tool.urdf.xacro"/>
-
-  <xacro:tool parent="axia80_ft_measure" name="tool1">
-    <origin xyz="0 0 0.013" rpy="0 0 0"/>
-  </xacro:tool>
+  <!-- Include FT-sensor and tool -->
+  <xacro:include filename="$(find kuka_control)/models/ft_tool.xacro" />
 
 </robot>

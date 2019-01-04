@@ -77,6 +77,11 @@ Visualization Manager:
           Show Axes: false
           Show Trail: false
           Value: true
+        brida_link:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
         link_1:
           Alpha: 1
           Show Axes: false
@@ -111,16 +116,6 @@ Visualization Manager:
           Alpha: 1
           Show Axes: false
           Show Trail: false
-        tool1_base:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-          Value: true
-        tool1_tip:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-          Value: true
         tool_base:
           Alpha: 1
           Show Axes: false
@@ -160,24 +155,106 @@ Visualization Manager:
     - Alpha: 0.5
       Class: rviz/RobotModel
       Collision Enabled: false
-      Enabled: false
+      Enabled: true
       Links:
         All Links Enabled: true
         Expand Joint Details: false
         Expand Link Details: false
         Expand Tree: false
-        Link Tree Style: ""
+        Link Tree Style: Links in Alphabetic Order
+        axia80_ft_base:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        axia80_ft_measure:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        base:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+        base_link:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        brida_link:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        link_1:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        link_2:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        link_3:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        link_4:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        link_5:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        link_6:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        tool0:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+        tool_base:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        tool_tip:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        world:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
       Name: KR6Model
       Robot Description: robot_description
       TF Prefix: ""
       Update Interval: 0
-      Value: false
+      Value: true
       Visual Enabled: true
     - Class: rviz/TF
       Enabled: true
       Frame Timeout: 15
       Frames:
         All Enabled: true
+        axia80_ft_base:
+          Value: true
+        axia80_ft_measure:
+          Value: true
+        base:
+          Value: true
+        base_link:
+          Value: true
+        brida_link:
+          Value: true
         cell/base:
           Value: true
         cell/base_link:
@@ -232,6 +309,8 @@ Visualization Manager:
           Value: true
         kr6/base_link:
           Value: true
+        kr6/brida_link:
+          Value: true
         kr6/link_1:
           Value: true
         kr6/link_2:
@@ -246,15 +325,29 @@ Visualization Manager:
           Value: true
         kr6/tool0:
           Value: true
-        kr6/tool1_base:
-          Value: true
-        kr6/tool1_tip:
-          Value: true
         kr6/tool_base:
           Value: true
         kr6/tool_tip:
           Value: true
         kr6/world:
+          Value: true
+        link_1:
+          Value: true
+        link_2:
+          Value: true
+        link_3:
+          Value: true
+        link_4:
+          Value: true
+        link_5:
+          Value: true
+        link_6:
+          Value: true
+        tool0:
+          Value: true
+        tool_base:
+          Value: true
+        tool_tip:
           Value: true
         world:
           Value: true
@@ -265,6 +358,22 @@ Visualization Manager:
       Show Names: true
       Tree:
         world:
+          base_link:
+            base:
+              {}
+            link_1:
+              link_2:
+                link_3:
+                  link_4:
+                    link_5:
+                      link_6:
+                        tool0:
+                          brida_link:
+                            axia80_ft_base:
+                              axia80_ft_measure:
+                                tool_base:
+                                  tool_tip:
+                                    {}
           cell/base_link:
             cell/base:
               {}
@@ -309,14 +418,12 @@ Visualization Manager:
                       kr6/link_5:
                         kr6/link_6:
                           kr6/tool0:
-                            kr6/axia80_ft_base:
-                              kr6/axia80_ft_measure:
-                                kr6/tool1_base:
-                                  kr6/tool1_tip:
-                                    {}
-              kr6/tool_base:
-                kr6/tool_tip:
-                  {}
+                            kr6/brida_link:
+                              kr6/axia80_ft_base:
+                                kr6/axia80_ft_measure:
+                                  kr6/tool_base:
+                                    kr6/tool_tip:
+                                      {}
       Update Interval: 0
       Value: true
     - Acceleration_Scaling_Factor: 1

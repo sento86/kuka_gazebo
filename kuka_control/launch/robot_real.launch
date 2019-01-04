@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<launch>
+
+  <arg name="ns" default=""/>
+  <arg name="x0" default="0"/>
+  <arg name="y0" default="0"/>
+  <arg name="z0" default="0"/>
+  <arg name="R0" default="0"/>
+  <arg name="P0" default="0"/>
+  <arg name="Y0" default="0"/>
+  
+  <!-- Generate/Load robot description file without namespace -->
+  <!--<include file="$(find kuka_description)/launch/description_real.launch"/>
+
+  <group  ns="$(arg ns)">-->
+
+    <!--<param name="x0" value= "$(arg x0)" />
+    <param name="y0" value= "$(arg y0)" />
+    <param name="z0" value= "$(arg z0)" />
+    <param name="R0" value= "$(arg R0)" />
+    <param name="P0" value= "$(arg P0)" />
+    <param name="Y0" value= "$(arg Y0)" />-->
+
+    <node pkg="tf" type="static_transform_publisher" name="world_to_base_$(arg ns)" args="$(arg x0) $(arg y0) $(arg z0) $(arg Y0) $(arg P0) $(arg R0) /world /base_link 100" />
+
+    <!-- Generate/Load robot description file -->
+    <include file="$(find kuka_description)/launch/description_real.launch"/>
+
+    <!-- Run KR6 controller -->
+    <include file="$(find kuka_rsi_hw_interface)/test/test_hardware_interface.launch">
+        <arg name="sim" value="false"/>
+    </include>
+
+  <!--</group>-->
+
+</launch>

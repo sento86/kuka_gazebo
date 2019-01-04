@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<launch>
+
+    <!-- Generate/Load robot description file -->
+    <param name="robot_description" command="$(find xacro)/xacro --inorder '$(find kuka_description)/urdf/kr6r900sixx_real.urdf.xacro'" />
+
+</launch>

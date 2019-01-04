@@ -3,11 +3,11 @@
 
   <xacro:arg name="gazebo" default="false"/>
 
-  <!-- Tool -->
-  <xacro:include filename="$(find kuka_control)/models/tool/tool.xacro" />
+  <!-- Brida -->
+  <xacro:include filename="$(find kuka_control)/models/brida/brida.xacro" />
 
-  <xacro:tool name="tool" parent="base_link">
+  <xacro:brida name="brida" parent="tool0">
       <origin xyz="0.0 0.0 0.0" rpy="0 0 0" />
-  </xacro:tool>
+  </xacro:brida>
 
 </robot>
