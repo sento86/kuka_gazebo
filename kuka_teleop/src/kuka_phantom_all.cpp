@@ -60,7 +60,7 @@
 #include "geometry_msgs/PoseStamped.h"
 #include "sensor_msgs/JointState.h"
 #include "geometry_msgs/WrenchStamped.h"
-#include "baxter_core_msgs/EndpointState.h"
+//#include "baxter_core_msgs/EndpointState.h"
 
 #include "std_msgs/String.h"
 #include "std_msgs/Float64.h"
@@ -101,7 +101,7 @@ class TeleopJoy
   omni_msgs::OmniButtonEvent haptic_button;
   std_msgs::Bool haptic_lock;
   geometry_msgs::WrenchStamped wrench;
-  baxter_core_msgs::EndpointState endpoint;
+  //baxter_core_msgs::EndpointState endpoint;
 
   sensor_msgs::JointState last_processed_joint_message_;
   omni_msgs::OmniState last_processed_joy_message_;
@@ -426,10 +426,10 @@ class TeleopJoy
   }
 
   /** Callback for Baxter's endpoint topic **/
-  void endpoint_cb(const baxter_core_msgs::EndpointState::ConstPtr& endpoint_msg)
-  {
-	  endpoint = *endpoint_msg;
-  }
+//  void endpoint_cb(const baxter_core_msgs::EndpointState::ConstPtr& endpoint_msg)
+//  {
+//	  endpoint = *endpoint_msg;
+//  }
 
   /** Callback for force/torque sensor topic **/
   void wrench_cb(const geometry_msgs::WrenchStamped::ConstPtr& wrench_msg)

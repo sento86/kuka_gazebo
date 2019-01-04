@@ -11,8 +11,8 @@ find_package(catkin REQUIRED COMPONENTS
   sensor_msgs
   std_msgs
   tf
-  omni_msgs
-  mtw_driver
+#  omni_msgs
+#  mtw_driver
   control_toolbox
 )
 
@@ -88,7 +88,7 @@ find_package(catkin REQUIRED COMPONENTS
 catkin_package(
 #  INCLUDE_DIRS include
 #  LIBRARIES teleop_joy
-  CATKIN_DEPENDS geometry_msgs roscpp rospy sensor_msgs std_msgs tf omni_msgs mtw_driver control_toolbox
+  CATKIN_DEPENDS geometry_msgs roscpp rospy sensor_msgs std_msgs tf control_toolbox #omni_msgs mtw_driver
 #  DEPENDS system_lib
 )
 
@@ -110,30 +110,31 @@ include_directories(
 
 ## Declare a cpp executable
 add_executable(kuka_gamepad src/kuka_gamepad.cpp)
-add_executable(kuka_falcon src/kuka_falcon.cpp)
-add_executable(kuka_falcon_all src/kuka_falcon_all.cpp)
-add_executable(kuka_phantom src/kuka_phantom.cpp)
-add_executable(kuka_phantom_all src/kuka_phantom_all.cpp)
-add_executable(kuka_xsens src/kuka_xsens.cpp)
-add_executable(kuka_mtw src/kuka_mtw.cpp)
+#add_executable(kuka_falcon src/kuka_falcon.cpp)
+#add_executable(kuka_falcon_all src/kuka_falcon_all.cpp)
+#add_executable(kuka_phantom src/kuka_phantom.cpp)
+#add_executable(kuka_phantom_all src/kuka_phantom_all.cpp)
+#add_executable(kuka_xsens src/kuka_xsens.cpp)
+#add_executable(kuka_mtw src/kuka_mtw.cpp)
 
 ## Add cmake target dependencies of the executable/library
 ## as an example, message headers may need to be generated before nodes
-add_dependencies(kuka_falcon ${catkin_EXPORTED_TARGETS})
-add_dependencies(kuka_falcon_all ${catkin_EXPORTED_TARGETS})
-add_dependencies(kuka_phantom ${catkin_EXPORTED_TARGETS})
-add_dependencies(kuka_phantom_all ${catkin_EXPORTED_TARGETS})
-add_dependencies(kuka_xsens ${catkin_EXPORTED_TARGETS})
-add_dependencies(kuka_mtw ${catkin_EXPORTED_TARGETS})
+add_dependencies(kuka_gamepad ${catkin_EXPORTED_TARGETS})
+#add_dependencies(kuka_falcon ${catkin_EXPORTED_TARGETS})
+#add_dependencies(kuka_falcon_all ${catkin_EXPORTED_TARGETS})
+#add_dependencies(kuka_phantom ${catkin_EXPORTED_TARGETS})
+#add_dependencies(kuka_phantom_all ${catkin_EXPORTED_TARGETS})
+#add_dependencies(kuka_xsens ${catkin_EXPORTED_TARGETS})
+#add_dependencies(kuka_mtw ${catkin_EXPORTED_TARGETS})
 
 ## Specify libraries to link a library or executable target against
 target_link_libraries(kuka_gamepad ${catkin_LIBRARIES})
-target_link_libraries(kuka_falcon ${catkin_LIBRARIES})
-target_link_libraries(kuka_falcon_all ${catkin_LIBRARIES})
-target_link_libraries(kuka_phantom ${catkin_LIBRARIES})
-target_link_libraries(kuka_phantom_all ${catkin_LIBRARIES})
-target_link_libraries(kuka_xsens ${catkin_LIBRARIES})
-target_link_libraries(kuka_mtw ${catkin_LIBRARIES})
+#target_link_libraries(kuka_falcon ${catkin_LIBRARIES})
+#target_link_libraries(kuka_falcon_all ${catkin_LIBRARIES})
+#target_link_libraries(kuka_phantom ${catkin_LIBRARIES})
+#target_link_libraries(kuka_phantom_all ${catkin_LIBRARIES})
+#target_link_libraries(kuka_xsens ${catkin_LIBRARIES})
+#target_link_libraries(kuka_mtw ${catkin_LIBRARIES})
  
 ################
 

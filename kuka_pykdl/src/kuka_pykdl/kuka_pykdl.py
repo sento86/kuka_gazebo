@@ -32,7 +32,7 @@ import PyKDL
 
 import rospy
 
-import baxter_interface
+#import baxter_interface
 
 from baxter_kdl.kdl_parser import kdl_tree_from_urdf_model
 from urdf_parser_py.urdf import URDF
@@ -42,18 +42,18 @@ class baxter_kinematics(object):
     Baxter Kinematics with PyKDL
     """
     def __init__(self, limb):
-        self._baxter = URDF.from_parameter_server(key='robot_description')
-        self._kdl_tree = kdl_tree_from_urdf_model(self._baxter)
-        self._base_link = self._baxter.get_root()
+        self._kuka = URDF.from_parameter_server(key='robot_description')
+        self._kdl_tree = kdl_tree_from_urdf_model(self._kuka)
+        self._base_link = self._kuka.get_root()
         self._tip_link = limb + '_gripper'
         self._tip_frame = PyKDL.Frame()
         self._arm_chain = self._kdl_tree.getChain(self._base_link,
                                                   self._tip_link)
 
         # Baxter Interface Limb Instances
-        self._limb_interface = baxter_interface.Limb(limb)
-        self._joint_names = self._limb_interface.joint_names()
-        self._num_jnts = len(self._joint_names)
+#        self._limb_interface = baxter_interface.Limb(limb)
+#        self._joint_names = self._limb_interface.joint_names()
+#        self._num_jnts = len(self._joint_names)
 
         # KDL Solvers
         self._fk_p_kdl = PyKDL.ChainFkSolverPos_recursive(self._arm_chain)
@@ -68,12 +68,12 @@ class baxter_kinematics(object):
 
     def print_robot_description(self):
         nf_joints = 0
-        for j in self._baxter.joints:
+        for j in self._kuka.joints:
             if j.type != 'fixed':
                 nf_joints += 1
         print "URDF non-fixed joints: %d;" % nf_joints
-        print "URDF total joints: %d" % len(self._baxter.joints)
-        print "URDF links: %d" % len(self._baxter.links)
+        print "URDF total joints: %d" % len(self._kuka.joints)
+        print "URDF links: %d" % len(self._kuka.links)
         print "KDL joints: %d" % self._kdl_tree.getNrOfJoints()
         print "KDL segments: %d" % self._kdl_tree.getNrOfSegments()
 
@@ -85,14 +85,14 @@ class baxter_kinematics(object):
         kdl_array = PyKDL.JntArray(self._num_jnts)
 
         if values is None:
-            if type == 'positions':
-                cur_type_values = self._limb_interface.joint_angles()
-            elif type == 'velocities':
-                cur_type_values = self._limb_interface.joint_velocities()
-            elif type == 'torques':
-                cur_type_values = self._limb_interface.joint_efforts()
-        else:
-            cur_type_values = values
+#            if type == 'positions':
+#                cur_type_values = self._limb_interface.joint_angles()
+#            elif type == 'velocities':
+#                cur_type_values = self._limb_interface.joint_velocities()
+#            elif type == 'torques':
+#                cur_type_values = self._limb_interface.joint_efforts()
+#        else:
+#            cur_type_values = values
         
         for idx, name in enumerate(self._joint_names):
             kdl_array[idx] = cur_type_values[name]

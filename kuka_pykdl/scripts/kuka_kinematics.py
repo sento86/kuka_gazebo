@@ -29,13 +29,13 @@
 
 import rospy
 
-from baxter_pykdl import baxter_kinematics
+from kuka_pykdl import kuka_kinematics
 
 
 def main():
-    rospy.init_node('baxter_kinematics')
+    rospy.init_node('kuka_kinematics')
     print '*** Baxter PyKDL Kinematics ***\n'
-    kin = baxter_kinematics('right')
+    kin = kuka_kinematics('right')
 
     print '\n*** Baxter Description ***\n'
     kin.print_robot_description()
