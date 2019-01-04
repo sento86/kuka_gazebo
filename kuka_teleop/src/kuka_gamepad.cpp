@@ -98,7 +98,7 @@ class TeleopJoy
     max_wx(0.5), max_wy(0.5), max_wz(0.5),
     max_q1(0.1), max_q2(0.1), max_q3(0.1),
 	max_q4(0.1), max_q5(0.1), max_q6(0.1),
-    level(1), mode(0), joint(0), num_modes(3), num_joints(7),
+    level(1), mode(0), joint(0), num_modes(3), num_joints(6),
 	deadman_no_publish_(deadman_no_publish),
     deadman_(false), last_deadman_(false),
     n_private_("~")
