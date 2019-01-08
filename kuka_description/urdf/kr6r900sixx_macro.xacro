@@ -10,7 +10,8 @@
   <xacro:property name="mass3" value="8.1" />
   <xacro:property name="mass4" value="1.7" />
   <xacro:property name="mass5" value="0.7" />
-  <xacro:property name="mass6" value="0.05" />
+<!--  <xacro:property name="mass6" value="0.05" />-->
+  <xacro:property name="mass6" value="1.0" />
 
   <xacro:property name="length0" value="0.215" />
   <xacro:property name="length1" value="0.26" />
@@ -18,7 +19,8 @@
   <xacro:property name="length3" value="0.17" />
   <xacro:property name="length4" value="0.34" />
   <xacro:property name="length5" value="0.08" />
-  <xacro:property name="length6" value="0.008" />
+<!--  <xacro:property name="length6" value="0.008" />-->
+  <xacro:property name="length6" value="0.021" />
 
   <xacro:property name="diameter0" value="0.2" />
   <xacro:property name="diameter1" value="0.2" />

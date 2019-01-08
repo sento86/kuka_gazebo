@@ -160,7 +160,7 @@ class TeleopJoy
 	cmd_joint.velocity.resize(num_joints);
 	//cmd_joint.effort.resize(num_joints);
 	for(int i=0; i<num_joints; i++){
-		std::string joint_name = "q"+std::to_string(i);
+		std::string joint_name = "q"+std::to_string(i+1);
 		cmd_joint.name[i]=joint_name;
 		cmd_joint.velocity[i]=0.0;
 	}

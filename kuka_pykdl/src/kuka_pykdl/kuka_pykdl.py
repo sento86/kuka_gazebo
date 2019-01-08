@@ -32,28 +32,30 @@ import PyKDL
 
 import rospy
 
-#import baxter_interface
+#import kuka_interface
 
-from baxter_kdl.kdl_parser import kdl_tree_from_urdf_model
+from kuka_kdl.kdl_parser import kdl_tree_from_urdf_model
 from urdf_parser_py.urdf import URDF
 
-class baxter_kinematics(object):
+class kuka_kinematics(object):
     """
-    Baxter Kinematics with PyKDL
+    Kuka Kinematics with PyKDL
     """
     def __init__(self, limb):
         self._kuka = URDF.from_parameter_server(key='robot_description')
         self._kdl_tree = kdl_tree_from_urdf_model(self._kuka)
         self._base_link = self._kuka.get_root()
-        self._tip_link = limb + '_gripper'
+#         self._tip_link = limb + '_gripper'
+        self._tip_link = 'tool0'
         self._tip_frame = PyKDL.Frame()
         self._arm_chain = self._kdl_tree.getChain(self._base_link,
                                                   self._tip_link)
 
-        # Baxter Interface Limb Instances
-#        self._limb_interface = baxter_interface.Limb(limb)
-#        self._joint_names = self._limb_interface.joint_names()
-#        self._num_jnts = len(self._joint_names)
+        # Kuka Interface Limb Instances
+#         self._limb_interface = baxter_interface.Limb(limb)
+#         self._joint_names = self._limb_interface.joint_names()
+        self._joint_names = ['joint_a1','joint_a2','joint_a3','joint_a4','joint_a5','joint_a6']
+        self._num_jnts = len(self._joint_names)
 
         # KDL Solvers
         self._fk_p_kdl = PyKDL.ChainFkSolverPos_recursive(self._arm_chain)
@@ -85,14 +87,18 @@ class baxter_kinematics(object):
         kdl_array = PyKDL.JntArray(self._num_jnts)
 
         if values is None:
-#            if type == 'positions':
-#                cur_type_values = self._limb_interface.joint_angles()
-#            elif type == 'velocities':
-#                cur_type_values = self._limb_interface.joint_velocities()
-#            elif type == 'torques':
-#                cur_type_values = self._limb_interface.joint_efforts()
-#        else:
-#            cur_type_values = values
+#             if type == 'positions':
+#                 cur_type_values = self._limb_interface.joint_angles()
+#             elif type == 'velocities':
+#                 cur_type_values = self._limb_interface.joint_velocities()
+#             elif type == 'torques':
+#                 cur_type_values = self._limb_interface.joint_efforts()
+            #cur_type_values = {'joint_a1': 0.0, 'joint_a2': -1.57, 'joint_a3': 1.57, 'joint_a4': 0.0, 'joint_a5': -1.57, 'joint_a6': 0.0}
+            self._joint_positions = [0.0,-1.57,1.57,0.0,1.57,0.0] # HARDCODED POSITION
+            cur_type_values = dict(zip(self._joint_names, self._joint_positions))
+
+        else:
+            cur_type_values = values
         
         for idx, name in enumerate(self._joint_names):
             kdl_array[idx] = cur_type_values[name]
