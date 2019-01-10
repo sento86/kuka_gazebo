@@ -9,6 +9,8 @@
 #include <tf/transform_listener.h>
 #include <tf2_kdl/tf2_kdl.h>
 
+#include <effort_controllers/joint_position_controller.h>  // used for controlling individual joints
+
 namespace joint_trajectory_controller
 {
     typedef trajectory_interface::QuinticSplineSegment<double> SegmentImpl;
@@ -97,6 +99,83 @@ public:
         id_solver.reset(new KDL::ChainIdSolver_RNE(chain, KDL::Vector(g.x(),g.y(),g.z())));
         ROS_INFO("Initialized kdl inverse dynamics solver");
 
+        //************************************************
+
+        // Get number of joints
+        n_joints_ = chain.getNrOfJoints();
+
+        // Store nodehandle
+        nh_ = nh;
+
+        // Get joint sub-controllers
+        XmlRpc::XmlRpcValue xml_struct;
+        if (!nh_.getParam("gains", xml_struct))
+        {
+          ROS_ERROR_NAMED("position", "No 'gains' parameter in controller (namespace '%s')", nh_.getNamespace().c_str());
+          return false;
+        }
+
+        // Make sure it's a struct
+        if (xml_struct.getType() != XmlRpc::XmlRpcValue::TypeStruct)
+        {
+          ROS_ERROR_NAMED("position", "The 'gains' parameter is not a struct (namespace '%s')", nh_.getNamespace().c_str());
+          return false;
+        }
+
+        // Get number of PID controllers
+        n_PIDs_ = xml_struct.size();
+        ROS_INFO_STREAM_NAMED("position", "Initializing BaxterPositionController with " << n_PIDs_ << " PID controllers.");
+
+        ROS_ERROR_STREAM(n_PIDs_);
+
+        position_controllers_.resize(n_PIDs_);
+        Kp.resize(n_PIDs_);
+        Kd.resize(n_PIDs_);
+
+        int i = 0;  // track the joint id
+        for (XmlRpc::XmlRpcValue::iterator joint_it = xml_struct.begin(); joint_it != xml_struct.end(); ++joint_it)
+        {
+          // Get joint controller
+          if (joint_it->second.getType() != XmlRpc::XmlRpcValue::TypeStruct)
+          {
+            ROS_ERROR_NAMED("position", "The 'joints/joint_controller' parameter is not a struct (namespace '%s')",
+                            nh_.getNamespace().c_str());
+            return false;
+          }
+
+          // Get joint controller name
+          std::string joint_controller_name = joint_it->first;
+
+          ROS_ERROR_STREAM(joint_controller_name);
+
+          if (nh_.getParam("gains/"+joint_controller_name+"/p", Kp[i]))
+              ROS_ERROR_STREAM(Kp[i]);
+          if (nh_.getParam("gains/"+joint_controller_name+"/d", Kd[i]))
+              ROS_ERROR_STREAM(Kd[i]);
+
+//          // Get the joint-namespace nodehandle
+//          {
+//            ros::NodeHandle joint_nh(nh_, "joints/" + joint_controller_name);
+//            ROS_DEBUG_STREAM_NAMED("init", "Loading sub-controller '" << joint_controller_name
+//                                                                     << "', Namespace: " << joint_nh.getNamespace());
+//
+//            position_controllers_[i].reset(new effort_controllers::JointPositionController());
+//            position_controllers_[i]->init(robot, joint_nh);
+//
+//            // DEBUG
+//            // position_controllers_[i]->printDebug();
+//
+//          }  // end of joint-namespaces
+//
+//          // Add joint name to map (allows unordered list to quickly be mapped to the ordered index)
+//          joint_to_index_map_.insert(std::pair<std::string, std::size_t>(position_controllers_[i]->getJointName(), i));
+
+          // increment joint i
+          ++i;
+        }
+
+        //************************************************
+
         return true;
     }
 
@@ -128,7 +207,7 @@ public:
 
             // Compute outer loop control.
             // todo: dynamic reconfigure parameters.
-            outer_loop_control.data[idx] = 100 * state_error.position[idx] + 10 * state_error.velocity[idx];
+            outer_loop_control.data[idx] = Kp[idx] * state_error.position[idx] + Kd[idx] * state_error.velocity[idx];
         }
 
         // No external forces (except gravity).
@@ -187,4 +266,19 @@ private:
 
     // Joints efforts.
     std::vector<double> *joints_efforts;
+
+    //************************************************
+
+    ros::NodeHandle nh_;
+
+    size_t n_PIDs_;
+    size_t n_joints_;
+
+    std::vector<double> Kp;
+    std::vector<double> Kd;
+
+    std::map<std::string, std::size_t> joint_to_index_map_;  // allows incoming messages to be quickly ordered
+
+    // Create an effort-based joint position controller for every joint
+    std::vector<boost::shared_ptr<effort_controllers::JointPositionController> > position_controllers_;
 };

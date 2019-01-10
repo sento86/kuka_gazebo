@@ -1,15 +1,15 @@
 # Angular velocities (Joints)
-max_q1: 0.5 # rad/s
-max_q2: 0.5 # rad/s
-max_q2: 0.5 # rad/s
-max_q4: 0.5 # rad/s
-max_q5: 0.5 # rad/s
-max_q6: 0.5 # rad/s
+max_q1: 1.0 # rad/s
+max_q2: 1.0 # rad/s
+max_q2: 1.0 # rad/s
+max_q4: 1.0 # rad/s
+max_q5: 1.0 # rad/s
+max_q6: 1.0 # rad/s
 
 # Cartesian linear/angular velocities (Gripper)
-max_vx: 0.1 # m/s
-max_vy: 0.1 # m/s
-max_vz: 0.1 # m/s
+max_vx: 0.2 # m/s
+max_vy: 0.2 # m/s
+max_vz: 0.2 # m/s
 max_wx: 0.2 # rad/s
 max_wy: 0.2 # rad/s
 max_wz: 0.2 # rad/s

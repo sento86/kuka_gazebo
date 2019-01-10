@@ -239,25 +239,16 @@ class KR6control:
         
         return self.kin.jacobian() * vel_joints
         
-    def go_home(self):
+    def go_home(self, delay = 2.0):
         
-#         self.iter+=1
-# 
-#         self.trajectory.header = Header(stamp=rospy.Time.now(), frame_id='base', seq=self.iter)
-#         self.trajectory.points[0] = JointTrajectoryPoint(positions = self.home, time_from_start = rospy.Duration(1,0))
-#         
-#         self.pubTrajectory.publish(self.trajectory) # KR6 (simulated)
-#         self.pubTrajectory_.publish(self.trajectory) # KR6 (real)
-#         
-#         rospy.sleep(3)
-        
-        # While loop
-        for i in range(0,500):
+        iters = int(round(delay/self.Tc))
+
+        for i in range(0,iters):
          
             self.iter+=1
  
             self.trajectory.header = Header(stamp=rospy.Time.now(), frame_id='base', seq=self.iter)
-            self.trajectory.points[0] = JointTrajectoryPoint(positions = self.home, time_from_start = rospy.Duration(1,0))
+            self.trajectory.points[0] = JointTrajectoryPoint(positions = self.home, time_from_start = rospy.Duration(delay-i*self.Tc,0))
          
             self.pubTrajectory.publish(self.trajectory) # KR6 (simulated)
             self.pubTrajectory_.publish(self.trajectory) # KR6 (real)

@@ -1,33 +1,40 @@
-#Publish all joint states
-joint_state_controller:
-  type: joint_state_controller/JointStateController
-  publish_rate: 50
+#robot:
 
-# Joint trajectory controller
-position_trajectory_controller:
-  type: "kuka_control/JointTrajectoryController"
-  joints:
-    - joint_a1
-    - joint_a2
-    - joint_a3
-    - joint_a4
-    - joint_a5
-    - joint_a6
+  #Publish all joint states
+  joint_state_controller:
+    type: joint_state_controller/JointStateController
+    publish_rate: 100
+        
+  # Joint trajectory controller
+  position_trajectory_controller:
+    type: "kuka_control/JointTrajectoryController"
+    joints:
+      - joint_a1
+      - joint_a2
+      - joint_a3
+      - joint_a4
+      - joint_a5
+      - joint_a6
+    gains:
+      joint_a1:
+        p: 500
+        d: 50
+      joint_a2:
+        p: 1000
+        d: 200
+      joint_a3:
+        p: 1000
+        d: 200
+      joint_a4:
+        p: 1000
+        d: 100
+      joint_a5:
+        p: 10000
+        d: 500
+      joint_a6:
+        p: 10000
+        d: 500
 
-  gains:
-#    joint_a1: {p: 100, d: 1, i: 0.1}
-#    joint_a2: {p: 100, d: 1, i: 0.1}
-#    joint_a3: {p: 100, d: 1, i: 0.1}
-#    joint_a4: {p: 100, d: 1, i: 0.1}
-#    joint_a5: {p: 100, d: 1, i: 0.1}
-#    joint_a6: {p: 50, d: 0.5, i: 0.1}
-    joint_a1: {p: 0, d: 0, i: 0}
-    joint_a2: {p: 0, d: 0, i: 0}
-    joint_a3: {p: 0, d: 0, i: 0}
-    joint_a4: {p: 0, d: 0, i: 0}
-    joint_a5: {p: 0, d: 0, i: 0}
-    joint_a6: {p: 0, d: 0, i: 0}
 
-
-  state_publish_rate: 50 # Defaults to 50
-  action_monitor_rate: 20 # Defaults to 20
+    state_publish_rate: 50 # Defaults to 50
+    action_monitor_rate: 20 # Defaults to 20
