@@ -130,7 +130,12 @@ public:
 
         position_controllers_.resize(n_PIDs_);
         Kp.resize(n_PIDs_);
+        Ki.resize(n_PIDs_);
         Kd.resize(n_PIDs_);
+
+        state_error_integral.resize(n_joints_);
+        std::fill(state_error_integral.begin(), state_error_integral.end(), 0.0);
+
 
         int i = 0;  // track the joint id
         for (XmlRpc::XmlRpcValue::iterator joint_it = xml_struct.begin(); joint_it != xml_struct.end(); ++joint_it)
@@ -150,6 +155,8 @@ public:
 
           if (nh_.getParam("gains/"+joint_controller_name+"/p", Kp[i]))
               ROS_ERROR_STREAM(Kp[i]);
+          if (nh_.getParam("gains/"+joint_controller_name+"/i", Ki[i]))
+              ROS_ERROR_STREAM(Ki[i]);
           if (nh_.getParam("gains/"+joint_controller_name+"/d", Kd[i]))
               ROS_ERROR_STREAM(Kd[i]);
 
@@ -207,7 +214,10 @@ public:
 
             // Compute outer loop control.
             // todo: dynamic reconfigure parameters.
-            outer_loop_control.data[idx] = Kp[idx] * state_error.position[idx] + Kd[idx] * state_error.velocity[idx];
+            outer_loop_control.data[idx] = Kp[idx] * state_error.position[idx] + Kd[idx] * state_error.velocity[idx] + Ki[idx] * state_error_integral[idx];
+
+            //state_error_integral[idx] += state_error.position[idx]*0.01;
+            state_error_integral[idx] += state_error.position[idx];
         }
 
         // No external forces (except gravity).
@@ -275,7 +285,10 @@ private:
     size_t n_joints_;
 
     std::vector<double> Kp;
+    std::vector<double> Ki;
     std::vector<double> Kd;
+
+    std::vector<double> state_error_integral;
 
     std::map<std::string, std::size_t> joint_to_index_map_;  // allows incoming messages to be quickly ordered
 

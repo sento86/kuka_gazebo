@@ -17,23 +17,29 @@
       - joint_a6
     gains:
       joint_a1:
-        p: 500
-        d: 50
+        p: 100
+        i: 0.01
+        d: 10
       joint_a2:
-        p: 1000
+        p: 2000
+        i: 2
         d: 200
       joint_a3:
-        p: 1000
+        p: 2000
+        i: 2
         d: 200
       joint_a4:
-        p: 1000
-        d: 100
+        p: 2000
+        i: 2
+        d: 200
       joint_a5:
-        p: 10000
+        p: 5000
+        i: 5
         d: 500
       joint_a6:
-        p: 10000
-        d: 500
+        p: 2000
+        i: 2
+        d: 200
 
 
     state_publish_rate: 50 # Defaults to 50

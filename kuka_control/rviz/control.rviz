@@ -245,16 +245,6 @@ Visualization Manager:
       Frame Timeout: 15
       Frames:
         All Enabled: true
-        axia80_ft_base:
-          Value: true
-        axia80_ft_measure:
-          Value: true
-        base:
-          Value: true
-        base_link:
-          Value: true
-        brida_link:
-          Value: true
         cell/base:
           Value: true
         cell/base_link:
@@ -331,24 +321,6 @@ Visualization Manager:
           Value: true
         kr6/world:
           Value: true
-        link_1:
-          Value: true
-        link_2:
-          Value: true
-        link_3:
-          Value: true
-        link_4:
-          Value: true
-        link_5:
-          Value: true
-        link_6:
-          Value: true
-        tool0:
-          Value: true
-        tool_base:
-          Value: true
-        tool_tip:
-          Value: true
         world:
           Value: true
       Marker Scale: 0.25
@@ -358,22 +330,6 @@ Visualization Manager:
       Show Names: true
       Tree:
         world:
-          base_link:
-            base:
-              {}
-            link_1:
-              link_2:
-                link_3:
-                  link_4:
-                    link_5:
-                      link_6:
-                        tool0:
-                          brida_link:
-                            axia80_ft_base:
-                              axia80_ft_measure:
-                                tool_base:
-                                  tool_tip:
-                                    {}
           cell/base_link:
             cell/base:
               {}
@@ -643,7 +599,7 @@ Visualization Manager:
       Min Intensity: 0
       Name: PointCloud1
       Position Transformer: XYZ
-      Queue Size: 10
+      Queue Size: 0
       Selectable: true
       Size (Pixels): 3
       Size (m): 0.00499999989
@@ -673,7 +629,7 @@ Visualization Manager:
       Min Intensity: 0
       Name: PointCloud2
       Position Transformer: XYZ
-      Queue Size: 10
+      Queue Size: 0
       Selectable: true
       Size (Pixels): 3
       Size (m): 0.00499999989
@@ -703,7 +659,7 @@ Visualization Manager:
       Min Intensity: 0
       Name: PointCloud3
       Position Transformer: XYZ
-      Queue Size: 10
+      Queue Size: 0
       Selectable: true
       Size (Pixels): 3
       Size (m): 0.00499999989
@@ -733,7 +689,7 @@ Visualization Manager:
       Min Intensity: 0
       Name: PointCloud4
       Position Transformer: XYZ
-      Queue Size: 10
+      Queue Size: 0
       Selectable: true
       Size (Pixels): 3
       Size (m): 0.00499999989
