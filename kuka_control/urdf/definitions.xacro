@@ -1,0 +1,13 @@
+<?xml version="1.0"?>
+
+<robot name="definitions"
+    xmlns:xacro="http://ros.org/wiki/xacro">
+
+    <!-- URDF Files -->
+    <xacro:include filename="$(find kuka_control)/urdf/maths.urdf.xacro" />
+    <xacro:include filename="$(find kuka_control)/urdf/materials.urdf.xacro" />
+    <xacro:include filename="$(find kuka_control)/urdf/inertia_tensors.urdf.xacro" />
+    <xacro:include filename="$(find kuka_control)/urdf/joint_macros.urdf.xacro" />
+    <xacro:include filename="$(find kuka_control)/urdf/sensor_macros.urdf.xacro" />
+
+</robot>

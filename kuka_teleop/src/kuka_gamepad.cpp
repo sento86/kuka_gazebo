@@ -33,7 +33,7 @@
 
 //***********************************************
 
-#define DEFAULT_MAX_LEVEL           5.0
+#define DEFAULT_MAX_LEVEL           10.0
 #define NUM_AXIS                    6
 #define NUM_BUTTONS                 13
 #define JOYSTICK_HZ                 100.0   //Desired frequency
@@ -78,7 +78,7 @@ class TeleopJoy
   double max_q1, max_q2, max_q3, max_q4, max_q5, max_q6;
   double percentage_level;
   int level, mode, joint, num_modes, num_joints;
-  int up_button, down_button, mode_button, joint_button, deadman_button;
+  int up_button, down_button, mode_button, joint_up_button, joint_down_button, deadman_button;
   bool deadman_no_publish_, deadman_, last_deadman_;
   std::string last_selected_topic_;
   std::string cmd_vel_topic_, cmd_joint_topic_;
@@ -149,7 +149,8 @@ class TeleopJoy
 	n_private_.param("up_button", up_button, 5);
 	n_private_.param("down_button", down_button, 7);
 	n_private_.param("mode_button", mode_button, 6);
-	n_private_.param("joint_button", joint_button, 0);
+	n_private_.param("joint_up_button", joint_up_button, 0);
+	n_private_.param("joint__down_button", joint_down_button, 1);
 	n_private_.param("deadman_button", deadman_button, 4);
 
 	n_private_.param("num_modes", num_modes, num_modes);
@@ -208,7 +209,8 @@ class TeleopJoy
 	ROS_DEBUG("up_button: %d", up_button);
 	ROS_DEBUG("down_button: %d", down_button);
 	ROS_DEBUG("mode_button: %d", mode_button);
-	ROS_DEBUG("joint_button: %d", joint_button);
+	ROS_DEBUG("joint_up_button: %d", joint_up_button);
+	ROS_DEBUG("joint_down_button: %d", joint_down_button);
 	ROS_DEBUG("deadman_button: %d", deadman_button);
 	ROS_DEBUG("joy_msg_timeout: %f", joy_msg_timeout);
 
@@ -246,9 +248,12 @@ class TeleopJoy
     	if(mode>=num_modes)	mode=0;
     }
 
-    if(((unsigned int)joint_button < joy_msg->buttons.size()) && joy_msg->buttons[joint_button]){
+    if(((unsigned int)joint_up_button < joy_msg->buttons.size()) && joy_msg->buttons[joint_up_button]){
     	joint++;
     	if(joint>=num_joints)	joint=0;
+    }else if(((unsigned int)joint_down_button < joy_msg->buttons.size()) && joy_msg->buttons[joint_down_button]){
+        joint--;
+        if(joint<0)	joint=num_joints-1;
     }
 
     // Increase or decrease gears

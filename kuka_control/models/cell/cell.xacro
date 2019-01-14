@@ -1,9 +1,10 @@
 <?xml version="1.0" ?>
 <robot name="cell" xmlns:xacro="http://ros.org/wiki/xacro">
 
-  <link name="base_link"/>
+  <!-- World frame (for Gazebo) -->
+  <link name="world"/>
 
-  <link name="base">
+  <link name="base_link">
       <inertial>
           <mass value="500" />
           <origin xyz="0 0 0" rpy="0 0 0" />
@@ -21,10 +22,15 @@
       </collision>
   </link>
 
+  <!-- Cell fixed to world frame  -->
   <joint name="base_joint" type="fixed">
       <origin xyz="0.0 0.0 0.0" rpy="0 0 0" />
-      <parent link="base_link" />
-      <child link="base"/>
+      <parent link="world" />
+      <child link="base_link"/>
   </joint>
+  
+  <gazebo>
+    <static>true</static>
+  </gazebo>
 
 </robot>

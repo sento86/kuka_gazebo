@@ -1,0 +1,103 @@
+<?xml version="1.0"?> 
+<sdf version="1.4">
+  <world name="terrain_throttled">
+
+    <gui fullscreen="false">
+      <camera name="camera1">
+        <pose>0 0 4 0 1.57 0</pose>
+      </camera>
+    </gui>
+                                      
+    <scene>
+      <sky>
+        <clouds>
+          <speed>12</speed>
+        </clouds>
+      </sky>
+      <ambient>0.1 0.1 0.1 1</ambient>
+      <shadows>true</shadows>
+<!--      <shadows enabled="false"/>
+      <grid enabled="true"/>-->
+<!--
+      <fog>
+        <color>1 2 3 4</color>
+        <type>linear</type>
+        <start>.1</start>
+        <end>100.1</end>
+        <density>0.5</density>
+      </fog>
+-->
+      <background>.5 .5 .5 1</background>
+    </scene>
+
+
+<!-- 
+    updateRate:
+    = 0: Gazebo will run as fast as it can
+    > 0: This number will represent the desired physics update frequency.
+	 In this case, Gazebo will run STEP_TIME*UPDATE_RATE times reality.
+    Example: dt=0.001 and update_rate=1000 -> throttle sim update to 100% real-time
+-->
+<!-- default cfm (single precision) = 10e-5 / double precision = 10e-10 -->
+<!-- default erp = 0.2 / typical range = [0.1-0.8] -->
+<!-- "quick" faster than "world" step for large systems -->
+<!-- default stepIters = 20 / solving inaccuracy problems=higher values -->
+<!-- contactMaxCorrectingVel: default value is infinity (i.e. no limit) -->
+<!-- contactSurfaceLayer: default value = 0 -->
+
+    <physics type="ode">
+      <max_step_size> 0.001</max_step_size>
+      <real_time_factor> 1.0</real_time_factor>
+      <real_time_update_rate> 1000</real_time_update_rate>
+      <max_contacts> 20</max_contacts>
+      <gravity> 0 0 -9.81</gravity>
+<!--
+      <ode>
+        <solver type="quick" min_step_size="0.0001" iters="100" sor="1.3"/>
+        <constraints cfm="0" erp="0.2" contact_max_correcting_vel="100.0" contact_surface_layer="0.001"/>
+      </ode>
+-->
+      <ode>
+        <solver>
+          <type> quick</type>
+          <min_step_size> 0.0001</min_step_size>
+          <iters> 100</iters>
+          <sor> 1.3</sor>
+        </solver>
+        <constraints>
+          <cfm> 0</cfm>
+          <erp> 0.2</erp>
+          <contact_max_correcting_vel> 100.0</contact_max_correcting_vel>
+          <contact_surface_layer> 0.001</contact_surface_layer>
+        </constraints>
+      </ode>
+    </physics>
+
+<!--
+    <physics type="bullet">
+      <gravity>0 0 -9.81</gravity>
+      <bullet />
+      <max_step_size>0.001</max_step_size>
+    </physics>
+-->
+
+
+    <!-- A ground plane -->
+    <include>
+      <uri>model://grass_terrain</uri>
+    </include>
+
+    <!-- A global light source -->
+    <include><uri>model://sun</uri></include>
+
+<!--
+    <include>
+      <uri>model://camera</uri>
+      <pose>0 0 4 0 1.57 0</pose>
+      <name>camera</name>
+    </include>
+-->   
+
+
+  </world>
+</sdf>

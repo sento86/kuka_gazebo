@@ -34,7 +34,8 @@ axis_wz: 2
 up_button: 5
 down_button: 7
 mode_button: 6
-joint_button: 3
+joint_up_button: 3
+joint_down_button: 1
 deadman_button: 4
 
 # Timeout for joystick reset (<0 no timeout)

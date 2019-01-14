@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+
+<robot name="maths"
+    xmlns:xacro="http://ros.org/wiki/xacro">
+
+    <!-- MATHEMATIC DEFINITIONS -->
+    <xacro:property name="M_PI" value="3.141592654"/>
+    <xacro:property name="M_PI_2" value="1.570796327"/>
+    <xacro:property name="M_PI_3" value="1.047197551"/>
+    <xacro:property name="M_PI_4" value="0.785398163"/>
+    <xacro:property name="M_PI_6" value="0.523598776"/>
+    <xacro:property name="COS_M_PI" value="-1.0"/>
+    <xacro:property name="COS_M_PI_2" value="0.0"/>
+    <xacro:property name="COS_M_PI_3" value="0.5"/>
+    <xacro:property name="COS_M_PI_4" value="0.707106781"/>
+    <xacro:property name="COS_M_PI_6" value="0.866025404"/>
+    <xacro:property name="COS_0" value="1.0"/>
+    <xacro:property name="SIN_M_PI" value="0.0"/>
+    <xacro:property name="SIN_M_PI_2" value="1.0"/>
+    <xacro:property name="SIN_M_PI_3" value="0.866025404"/>
+    <xacro:property name="SIN_M_PI_4" value="0.707106781"/>
+    <xacro:property name="SIN_M_PI_6" value="0.5"/>
+    <xacro:property name="SIN_0" value="0.0"/>
+
+</robot>

@@ -17,28 +17,28 @@
       - joint_a6
     gains:
       joint_a1:
-        p: 100
+        p: 1000
         i: 0.01
-        d: 10
+        d: 100
       joint_a2:
         p: 2000
-        i: 2
+        i: 0.01
         d: 200
       joint_a3:
         p: 2000
-        i: 2
+        i: 0.01
         d: 200
       joint_a4:
         p: 2000
-        i: 2
+        i: 0.01
         d: 200
       joint_a5:
         p: 5000
-        i: 5
+        i: 0.01
         d: 500
       joint_a6:
         p: 2000
-        i: 2
+        i: 0.01
         d: 200
 
 

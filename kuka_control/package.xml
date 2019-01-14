@@ -56,7 +56,7 @@
   <export>
     <!-- Other tools can request additional information be placed here -->
     <controller_interface plugin="${prefix}/kuka_control_plugins.xml"/>
-    <gazebo_ros gazebo_model_path="${prefix}/models"/>
-    <gazebo_ros gazebo_media_path="${prefix}/models"/>
+    <gazebo gazebo_model_path="${prefix}/models"/>
+    <gazebo gazebo_media_path="${prefix}"/>
   </export>
 </package>

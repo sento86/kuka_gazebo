@@ -10,6 +10,7 @@
   <xacro:include filename="$(find kuka_control)/models/sensors/camera.urdf.xacro" />
 
   <!-- Car door -->
-  <xacro:include filename="$(find kuka_control)/models/car_door/car_door.urdf.xacro" />
+<!--  <xacro:include filename="$(find kuka_control)/models/car_door/car_door.urdf.xacro" />-->
+  <xacro:include filename="$(find kuka_control)/models/box/box.urdf.xacro" />
 
 </robot>

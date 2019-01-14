@@ -15,7 +15,7 @@
 <!-- ****************************************************************************** -->
 
   <!-- Publish a static transform between the world and the base of the robot -->
-  <node pkg="tf2_ros" type="static_transform_publisher" name="base_to_$(arg ns)" args="$(arg x0) $(arg y0) $(arg z0) $(arg Y0) $(arg P0) $(arg R0) /world $(arg ns)/base_link" />
+  <node pkg="tf2_ros" type="static_transform_publisher" name="base_to_$(arg ns)" args="$(arg x0) $(arg y0) $(arg z0) $(arg Y0) $(arg P0) $(arg R0) /world $(arg ns)/world" />
 
 <!-- ****************************************************************************** -->
 

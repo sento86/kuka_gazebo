@@ -1,0 +1,45 @@
+<?xml version="1.0" ?>
+<robot name="box" xmlns:xacro="http://ros.org/wiki/xacro">
+
+  <xacro:include filename="$(find kuka_control)/urdf/definitions.xacro" />
+
+  <xacro:macro name="box_metal" params="name parent *origin">
+
+  <link name="${name}_link">
+      <!--<inertial>
+          <mass value="10" />
+          <origin xyz="0 0 0" rpy="0 0 0" />
+          <inertia ixx="0.1" ixy="0" ixz="0" iyy="0.1" iyz="0" izz="0.1" />
+      </inertial>-->
+      <xacro:inertial_cuboid_with_pose mass="10.0" x_length="1.0" y_length="0.5" z_length="0.2">
+          <origin xyz="0 0 0" rpy="0 0 0" />      
+      </xacro:inertial_cuboid_with_pose>      
+      <visual name="visual">
+        <geometry>
+            <mesh filename="package://kuka_control/models/box/meshes/box.stl" scale="1.0 0.5 0.2"/>
+        </geometry>
+        <material name="Aluminum"/>
+      </visual>
+      <collision name="collision">
+        <geometry>
+          <box size="1.0 0.5 0.2"/>
+        </geometry>
+      </collision>
+  </link>
+
+  <joint name="${name}_joint" type="fixed">
+      <xacro:insert_block name="origin" />
+      <parent link="${parent}" />
+      <child link="${name}_link"/>
+  </joint>
+  
+  <gazebo reference="${name}_link">
+      <turnGravityOff>false</turnGravityOff>
+      <selfCollide>false</selfCollide>
+      <!--<material>Gazebo/Red</material>-->
+      <material>wood</material>
+  </gazebo>
+
+  </xacro:macro>
+
+</robot>

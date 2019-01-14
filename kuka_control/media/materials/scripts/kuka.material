@@ -1,0 +1,545 @@
+
+material 1_circle
+{
+	technique
+	{
+		pass main
+		{
+			ambient 10.0 10.0 10.0
+
+			texture_unit
+			{
+				texture 1_circle.png
+			}
+		}
+	}
+}
+
+material 1_circle_blue
+{
+	technique
+	{
+		pass main
+		{
+			ambient 10.0 10.0 10.0
+
+			texture_unit
+			{
+				texture 1_circle_blue.png
+			}
+		}
+	}
+}
+
+material 1_circle_red
+{
+	technique
+	{
+		pass main
+		{
+			ambient 10.0 10.0 10.0
+
+			texture_unit
+			{
+				texture 1_circle_red.png
+			}
+		}
+	}
+}
+
+material 2_circles
+{
+	technique
+	{
+		pass main
+		{
+			ambient 10.0 10.0 10.0
+
+			texture_unit
+			{
+				texture 2_circles.png
+			}
+		}
+	}
+}
+
+material 4_circles
+{
+	technique
+	{
+		pass main
+		{
+			ambient 10.0 10.0 10.0
+
+			texture_unit
+			{
+				texture 4_circles.png
+			}
+		}
+	}
+}
+
+material 2_circles_RG
+{
+	technique
+	{
+		pass main
+		{
+			ambient 1.0 1.0 1.0 1
+
+			texture_unit
+			{
+				texture 2_circles_RG.png
+			}
+		}
+	}
+}
+
+material triangle_square
+{
+	technique
+	{
+		pass main
+		{
+			ambient 10.0 10.0 10.0
+
+			texture_unit
+			{
+				texture 1_triangle_1_square.png
+			}
+		}
+	}
+}
+
+material path
+{
+	technique
+	{
+		pass main
+		{
+			ambient 10.0 10.0 10.0
+
+			texture_unit
+			{
+				texture Path.png
+			}
+		}
+	}
+}
+
+material pathInverted
+{
+	technique
+	{
+		pass main
+		{
+			ambient 10.0 10.0 10.0
+
+			texture_unit
+			{
+				texture PathInverted.png
+			}
+		}
+	}
+}
+
+material pathInvertedBlack
+{
+	technique
+	{
+		pass main
+		{
+			ambient 10.0 10.0 10.0
+
+			texture_unit
+			{
+				texture PathInvertedBlack.png
+			}
+		}
+	}
+}
+
+material pathSquareBlack
+{
+	technique
+	{
+		pass main
+		{
+			ambient 10.0 10.0 10.0
+
+			texture_unit
+			{
+				texture PathSquareBlack.png
+			}
+		}
+	}
+}
+
+material pathSquareYellow
+{
+	technique
+	{
+		pass main
+		{
+			ambient 10.0 10.0 10.0
+
+			texture_unit
+			{
+				texture PathSquareYellow.png
+			}
+		}
+	}
+}
+
+material pathSquareBlue
+{
+	technique
+	{
+		pass main
+		{
+			ambient 10.0 10.0 10.0
+
+			texture_unit
+			{
+				texture PathSquareBlue.png
+			}
+		}
+	}
+}
+
+material pathSquareRed
+{
+	technique
+	{
+		pass main
+		{
+			ambient 10.0 10.0 10.0
+
+			texture_unit
+			{
+				texture PathSquareRed.png
+			}
+		}
+	}
+}
+
+material pathSquareBlueDirt
+{
+	technique
+	{
+		pass main
+		{
+			ambient 10.0 10.0 10.0
+
+			texture_unit
+			{
+				texture PathSquareBlueDirt.png
+			}
+		}
+	}
+}
+
+material pathSquareRedDirtPipe
+{
+	technique
+	{
+		pass main
+		{
+			ambient 10.0 10.0 10.0
+
+			texture_unit
+			{
+				texture PathSquareRedDirtPipe.png
+			}
+		}
+	}
+}
+
+material Dirt
+{
+	technique
+	{
+		pass main
+		{
+			ambient 10.0 10.0 10.0
+
+			texture_unit
+			{
+				texture Dirt.jpg
+			}
+		}
+	}
+}
+
+material White
+{
+	technique
+	{
+		pass main
+		{
+			ambient 10.0 10.0 10.0
+
+			texture_unit
+			{
+				texture white.png
+			}
+		}
+	}
+}
+
+material Blue
+{
+	technique
+	{
+		pass main
+		{
+			ambient 10.0 10.0 10.0
+
+			texture_unit
+			{
+				texture blue.png
+			}
+		}
+	}
+}
+
+material white
+{
+	receive_shadows on
+	technique
+	{
+		pass main
+		{
+			ambient 1.0 1.0 1.0
+		 	diffuse 1.0 1.0 1.0
+			specular 1.0 1.0 1.0 1 1
+		}
+	}
+}
+
+material silver
+{
+	receive_shadows on
+	technique
+	{
+		pass main
+		{
+			ambient 0.9 0.9 0.9
+		 	diffuse 0.9 0.9 0.9
+			specular 0.9 0.9 0.9 1 1
+		}
+	}
+}
+
+material gray
+{
+	receive_shadows on
+	technique
+	{
+		pass main
+		{
+			ambient 0.6 0.6 0.6
+		 	diffuse 0.6 0.6 0.6
+			specular 0.6 0.6 0.6 1 1
+		}
+	}
+}
+
+material grey
+{
+	receive_shadows on
+	technique
+	{
+		pass main
+		{
+			ambient 0.3 0.3 0.3
+		 	diffuse 0.3 0.3 0.3
+			specular 0.3 0.3 0.3 1 1
+		}
+	}
+}
+
+material black
+{
+	receive_shadows on
+	technique
+	{
+		pass main
+		{
+			ambient 0.1 0.1 0.1
+		 	diffuse 0.1 0.1 0.1
+			specular 0.1 0.1 0.1 1 1
+		}
+	}
+}
+
+material red
+{
+	receive_shadows on
+	technique
+	{
+		pass main
+		{
+			ambient 1 0 0 
+			diffuse 1 0 0
+			specular 0.1 0.1 0.1 1 1
+		}
+	}
+}
+
+material green
+{
+	receive_shadows on
+	technique
+	{
+		pass main
+		{
+			ambient 0 1 0
+		 	diffuse 0 1 0
+			specular 0.1 0.1 0.1 1 1
+		}
+	}
+}
+
+material blue
+{
+	receive_shadows on
+	technique
+	{
+		pass main
+		{
+			ambient 0 0 1
+			diffuse 0 0 1
+			specular 0.1 0.1 0.1 1 1
+		}
+	}
+}
+
+material yellow
+{
+	receive_shadows on
+	technique
+	{
+		pass main
+		{
+			ambient 1 1 0 
+			diffuse 1 1 0
+			specular 0.1 0.1 0.1 1 1
+		}
+	}
+}
+
+material cian
+{
+	receive_shadows on
+	technique
+	{
+		pass main
+		{
+			ambient 0 1 1
+		 	diffuse 0 1 1
+			specular 0.1 0.1 0.1 1 1
+		}
+	}
+}
+
+material magenta
+{
+	receive_shadows on
+	technique
+	{
+		pass main
+		{
+			ambient 1 0 1
+			diffuse 1 0 1
+			specular 0.1 0.1 0.1 1 1
+		}
+	}
+}
+
+material orange
+{
+	receive_shadows on
+	technique
+	{
+		pass main
+		{
+			ambient 1 0.5 0
+			diffuse 1 0.5 0
+			specular 0.1 0.1 0.1 1 1
+		}
+	}
+}
+
+material wood
+{
+	technique
+	{
+		pass main
+		{
+			ambient 1.0 1.0 1.0 1.0
+		        diffuse 1.0 1.0 1.0 1.0
+		        specular 0.2 0.2 0.2 1.0 12.5
+
+			texture_unit
+			{
+				texture OLDWOOD.JPG
+        			filtering trilinear
+			}
+		}
+	}
+}
+
+material aluminum
+{
+	technique
+	{
+		pass main
+		{
+			ambient 0.5 0.5 0.5 1
+
+			texture_unit
+			{
+				texture Simple_Metal_Mtl_Brush_pattern.jpg
+				#texture Metals.Ornamental.Metals.Bump.jpg
+			}
+		}
+	}
+}
+
+material metal
+{
+	technique
+	{
+		pass main
+		{
+			ambient 1.0 1.0 1.0 1
+
+			texture_unit
+			{
+				texture Concrete_Cast_In_Place_Flat_Grey_1.jpg
+			}
+		}
+	}
+}
+
+material grass
+{
+	technique
+	{
+		pass main
+		{
+			ambient 1.0 1.0 1.0 1.0
+			diffuse 1.0 1.0 1.0 1.0
+			specular 0.2 0.2 0.2 1.0 12.5
+
+			texture_unit
+			{
+				texture grass_1024.jpg
+				filtering anistropic
+				max_anisotropy 16
+				scale 0.1 0.1
+			}
+		}
+	}
+}

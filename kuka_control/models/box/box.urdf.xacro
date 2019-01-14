@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<robot name="box" xmlns:xacro="http://ros.org/wiki/xacro">
+
+  <xacro:arg name="gazebo" default="false"/>
+
+  <!-- Box URDF -->
+  <xacro:include filename="$(find kuka_control)/models/box/box.xacro"/>
+
+  <!-- Box -->
+  <xacro:box_metal name="box" parent="base_link">
+      <origin xyz="0.0 0.0 0.74" rpy="0 0 0" />
+  </xacro:box_metal>
+
+</robot>
