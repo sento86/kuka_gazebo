@@ -31,6 +31,8 @@
   <xacro:property name="diameter6" value="0.033" />
 
   <xacro:property name="max_effort" value="1200" />
+  <xacro:property name="damping" value="0.0"/>
+  <xacro:property name="friction" value="0.0"/>
 
   <xacro:macro name="kuka_kr6r900sixx" params="prefix">
     <link name="${prefix}base_link">
@@ -182,6 +184,7 @@
       <child link="${prefix}link_1"/>
       <axis xyz="0 0 -1"/>
       <limit effort="${max_effort}" lower="${-DEG2RAD * 170}" upper="${DEG2RAD * 170}" velocity="${DEG2RAD * 300}"/>
+      <dynamics damping="${damping}" friction="${friction}"/>
     </joint>
     <joint name="${prefix}joint_a2" type="revolute">
       <origin xyz="0.025 0 0" rpy="0 0 0"/>
@@ -189,6 +192,7 @@
       <child link="${prefix}link_2"/>
       <axis xyz="0 1 0"/>
       <limit effort="${max_effort}" lower="${-DEG2RAD * 190}" upper="${DEG2RAD * 45}" velocity="${DEG2RAD * 225}"/>
+      <dynamics damping="${damping}" friction="${friction}"/>
     </joint>
     <joint name="${prefix}joint_a3" type="revolute">
       <origin xyz="0.455 0 0" rpy="0 0 0"/>
@@ -196,6 +200,7 @@
       <child link="${prefix}link_3"/>
       <axis xyz="0 1 0"/>
       <limit effort="${max_effort}" lower="${-DEG2RAD * 120}" upper="${DEG2RAD * 156}" velocity="${DEG2RAD * 225}"/>
+      <dynamics damping="${damping}" friction="${friction}"/>
     </joint>
     <joint name="${prefix}joint_a4" type="revolute">
       <origin xyz="0 0 0.035" rpy="0 0 0"/>
@@ -203,6 +208,7 @@
       <child link="${prefix}link_4"/>
       <axis xyz="-1 0 0"/>
       <limit effort="${max_effort}" lower="${-DEG2RAD * 185}" upper="${DEG2RAD * 185}" velocity="${DEG2RAD * 381}"/>
+      <dynamics damping="${damping}" friction="${friction}"/>
     </joint>
     <joint name="${prefix}joint_a5" type="revolute">
       <origin xyz="0.420 0 0" rpy="0 0 0"/>
@@ -210,6 +216,7 @@
       <child link="${prefix}link_5"/>
       <axis xyz="0 1 0"/>
       <limit effort="${max_effort}" lower="${-DEG2RAD * 120}" upper="${DEG2RAD * 120}" velocity="${DEG2RAD * 311}"/>
+      <dynamics damping="${damping}" friction="${friction}"/>
     </joint>
     <joint name="${prefix}joint_a6" type="revolute">
       <origin xyz="0.080 0 0" rpy="0 0 0"/>
@@ -217,6 +224,7 @@
       <child link="${prefix}link_6"/>
       <axis xyz="-1 0 0"/>
       <limit effort="${max_effort}" lower="${-DEG2RAD * 350}" upper="${DEG2RAD * 350}" velocity="${DEG2RAD * 492}"/>
+      <dynamics damping="${damping}" friction="${friction}"/>
     </joint>
     <joint name="${prefix}joint_a6-tool0" type="fixed">
       <parent link="${prefix}link_6"/>

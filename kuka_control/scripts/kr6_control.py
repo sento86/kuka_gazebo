@@ -68,9 +68,10 @@ class KR6control:
         
         self.iter = 0
         
-        self.home = np.array([0.0,-1.57,1.57,0.0,-1.57,0.0])
+        self.home = np.array([0.0,-1.57,1.57,0.0,-1.57,0.0]).reshape((6,1))
+        #self.home = np.array([0.0,0.0,0.0,0.0,0.0,0.0]).reshape((6,1))
         
-        self.q = self.home
+        self.q = self.home.copy()
         
 #         self.q1 = self.q[0]
 #         self.q2 = self.q[1]
@@ -79,7 +80,8 @@ class KR6control:
 #         self.q5 = self.q[4]
 #         self.q6 = self.q[5]
         
-        self.w = np.array([0.0,0.0,0.0,0.0,0.0,0.0])
+#         self.w = np.array([0.0,0.0,0.0,0.0,0.0,0.0])
+        self.w = np.zeros((6,1))
         
 #         self.w1 = self.w[0]
 #         self.w2 = self.w[1]
@@ -88,7 +90,8 @@ class KR6control:
 #         self.w5 = self.w[4]
 #         self.w6 = self.w[5]
         
-        self.e = np.array([0.0,0.0,0.0,0.0,0.0,0.0])
+#         self.e = np.array([0.0,0.0,0.0,0.0,0.0,0.0])
+        self.e = np.zeros((6,1))
 
 #         self.e1 = self.e[0]
 #         self.e2 = self.e[1]
@@ -97,7 +100,8 @@ class KR6control:
 #         self.e5 = self.e[4]
 #         self.e6 = self.e[5]
         
-        self.u = np.array([0.0,0.0,0.0,0.0,0.0,0.0])
+#         self.u = np.array([0.0,0.0,0.0,0.0,0.0,0.0])
+        self.u = np.zeros((6,1))
 
 #         self.u1 = self.u[0]
 #         self.u2 = self.u[1]
@@ -106,7 +110,8 @@ class KR6control:
 #         self.u5 = self.u[4]
 #         self.u6 = self.u[5]
         
-        self.v = np.array([0.0,0.0,0.0,0.0,0.0,0.0])
+#         self.v = np.array([0.0,0.0,0.0,0.0,0.0,0.0])
+        self.v = np.zeros((6,1))
         
         self.joint_names = ['joint_a1','joint_a2','joint_a3','joint_a4','joint_a5','joint_a6']
         #self.joint_positions = np.array([self.q1,self.q2,self.q3,self.q4,self.q5,self.q6])
@@ -169,7 +174,12 @@ class KR6control:
 #         self.q4 = self._joint_states.position[4] # joint_a4
 #         self.q5 = self._joint_states.position[5] # joint_a5
 #         self.q6 = self._joint_states.position[6] # joint_a6
-        self.q = np.array(self._joint_states.position[1:7])
+#         self.q = np.array(self._joint_states.position[1:7]).reshape((6,1))
+#         self.q = np.array(self._joint_states.position[0:6]).reshape((6,1))
+        for i in range(len(self._joint_states.name)):
+            for j in range(len(self.joint_names)):
+                if self._joint_states.name[i]==self.joint_names[j]:
+                    self.q[j] = self._joint_states.position[i]
         
     def callback_cmd_joy(self, data):
         self._cmd_joy = data
@@ -185,7 +195,7 @@ class KR6control:
 #         self.w4 = self._cmd_joint.velocity[3] # joint_a4
 #         self.w5 = self._cmd_joint.velocity[4] # joint_a5
 #         self.w6 = self._cmd_joint.velocity[5] # joint_a6
-        self.w = np.array(self._cmd_joint.velocity[0:6])
+        self.w = np.array(self._cmd_joint.velocity[0:6]).reshape((6,1))
         # Reset cartesian velocities
 #         self.vx = 0.0
 #         self.vy = 0.0
@@ -193,7 +203,8 @@ class KR6control:
 #         self.wx = 0.0
 #         self.wy = 0.0
 #         self.wz = 0.0
-        self.v = np.array([0.0,0.0,0.0,0.0,0.0,0.0])
+#         self.v = np.array([0.0,0.0,0.0,0.0,0.0,0.0])
+        self.v = np.zeros((6,1))
         # Set new_cmd_joint as true
         #if (self.q1!=0.0 or self.q2!=0.0 or self.q3!=0.0 or self.q4!=0.0 or self.q5!=0.0 or self.q6!=0.0):
 #         if (math.fabs(self.q1)>0.01 or math.fabs(self.q2)>0.01 or math.fabs(self.q3)>0.01 or math.fabs(self.q4)>0.01 or math.fabs(self.q5)>0.01 or math.fabs(self.q6)>0.01):
@@ -212,7 +223,7 @@ class KR6control:
 #         self.wx = self._cmd_vel.twist.angular.x
 #         self.wy = self._cmd_vel.twist.angular.y
 #         self.wz = self._cmd_vel.twist.angular.z  
-        self.v = np.array([self._cmd_vel.twist.linear.x,self._cmd_vel.twist.linear.y,self._cmd_vel.twist.linear.z,self._cmd_vel.twist.angular.x,self._cmd_vel.twist.angular.y,self._cmd_vel.twist.angular.z])      
+        self.v = np.array([self._cmd_vel.twist.linear.x,self._cmd_vel.twist.linear.y,self._cmd_vel.twist.linear.z,self._cmd_vel.twist.angular.x,self._cmd_vel.twist.angular.y,self._cmd_vel.twist.angular.z]).reshape((6,1))
         # Reset angular velocities
 #         self.w1 = 0.0 # joint_a1
 #         self.w2 = 0.0 # joint_a2
@@ -220,7 +231,8 @@ class KR6control:
 #         self.w4 = 0.0 # joint_a4
 #         self.w5 = 0.0 # joint_a5
 #         self.w6 = 0.0 # joint_a6
-        self.w = np.array([0.0,0.0,0.0,0.0,0.0,0.0])
+#         self.w = np.array([0.0,0.0,0.0,0.0,0.0,0.0])
+        self.w = np.zeros((6,1))
         # Set new_cmd_vel as true
         #if (self.vx!=0.0 or self.vy!=0.0 or self.vz!=0.0 or self.wx!=0.0 or self.wy!=0.0 or self.wz!=0.0):
 #         if (math.fabs(self.vx)>0.01 or math.fabs(self.vy)>0.01 or math.fabs(self.vz)>0.01 or math.fabs(self.wx)>0.01 or math.fabs(self.wy)>0.01 or math.fabs(self.wz)>0.01):
@@ -282,7 +294,7 @@ class KR6control:
 #         self.u5 = self.q5
 #         self.u6 = self.q6
         
-        self.u = self.q
+        self.u = self.q.copy()
         
         # While loop
         while not rospy.is_shutdown():
@@ -314,9 +326,11 @@ class KR6control:
 
             if self.new_cmd_vel==True:
                 
-#                 v = np.array([self.vx, self.vy, self.vz, self.wx, self.wy, self.wz])[np.newaxis]
-                v = np.array([self.v[0], self.v[1], self.v[2], self.v[3], self.v[4], self.v[5]])[np.newaxis]
-                w = self.get_joint_vel(v.T) # Define a column vector
+# #                 v = np.array([self.vx, self.vy, self.vz, self.wx, self.wy, self.wz])[np.newaxis]
+#                 v = np.array([self.v[0], self.v[1], self.v[2], self.v[3], self.v[4], self.v[5]])[np.newaxis]
+#                 w = self.get_joint_vel(v.T) # Define a column vector
+#                 v = np.array([self.v[0], self.v[1], self.v[2], self.v[3], self.v[4], self.v[5]]).reshape((6,1))
+                self.w = self.get_joint_vel(self.v) # Define a column vector
                 #v = np.array([[self.vx], [self.vy], [self.vz], [self.wx], [self.wy], [self.wz]]) # Define a column vector)
                 #w = self.get_joint_vel(v) # Define a column vector
 
@@ -334,7 +348,7 @@ class KR6control:
 #                 self.w5 = w[4]
 #                 self.w6 = w[5]
 
-                self.w = np.squeeze(np.array(w), axis=1)
+#                 self.w = np.squeeze(np.array(w), axis=1)
 #                 self.w = np.reshape(w, 6)
 #                 self.w[0] = w[0]
 #                 self.w[1] = w[1]
@@ -355,9 +369,11 @@ class KR6control:
 
             # Update joint_positions only if there's a big difference between actual and reference joint positions (to avoid stuck configurations)
 #             error_norm = np.linalg.norm(np.array(self.u).transpose()-np.array(self.q).transpose())
-#             if(error_norm>0.5):
-#                 self.u = self.q
-            
+#             error_norm = np.linalg.norm(np.array(self.u).transpose()-np.array(self.q).transpose())
+#             print error_norm
+#             if(error_norm>0.001):
+#                 self.u = self.q.copy()
+                
             self.u = self.w*self.Tc + self.u
 #             self.u[0] = self.w[0]*self.Tc + self.u[0]
 #             self.u[1] = self.w[1]*self.Tc + self.u[1]

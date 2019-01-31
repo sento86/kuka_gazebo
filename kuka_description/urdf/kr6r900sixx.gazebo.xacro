@@ -19,6 +19,28 @@
       <controlPeriod>0.001</controlPeriod> <!-- Gazebo Default -->
     </plugin>
   </gazebo>
+  
+<!-- Joint damping -->
+<!--
+  <gazebo reference="joint_a1">
+    <implicitSpringDamper>1</implicitSpringDamper>
+  </gazebo>
+  <gazebo reference="joint_a2">
+    <implicitSpringDamper>1</implicitSpringDamper>
+  </gazebo>
+  <gazebo reference="joint_a3">
+    <implicitSpringDamper>1</implicitSpringDamper>
+  </gazebo>
+  <gazebo reference="joint_a4">
+    <implicitSpringDamper>1</implicitSpringDamper>
+  </gazebo>
+  <gazebo reference="joint_a5">
+    <implicitSpringDamper>1</implicitSpringDamper>
+  </gazebo>
+  <gazebo reference="joint_a6">
+    <implicitSpringDamper>1</implicitSpringDamper>
+  </gazebo>
+-->
 
 <!--Transmission and actuators-->
   <transmission name="tran1">

@@ -10,10 +10,10 @@
 		 ixy="0" iyz="0" ixz="0"/>
 	</xacro:macro>
 	<xacro:macro name="cylinder_inertia_def" params="radius length mass">
-	<inertia ixx="${mass * radius* radius / 2}"
-		 iyy="${mass * radius* radius / 2}"
-		 izz="${mass * (3 * radius * radius + length * length) / 12}"
-		 ixy="0" iyz="0" ixz="0"/>
+	<inertia ixx="${mass * (3 * radius * radius + length * length) / 12}"
+		     iyy="${mass * (3 * radius * radius + length * length) / 12}"
+		     izz="${mass * radius* radius / 2}"
+		     ixy="0" iyz="0" ixz="0"/>
 	</xacro:macro>
 
 	<!-- ############# -->

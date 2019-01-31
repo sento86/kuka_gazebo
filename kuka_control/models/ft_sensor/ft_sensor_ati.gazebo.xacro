@@ -15,19 +15,15 @@
       <provideFeedback>true</provideFeedback>
     </gazebo>
 
-    <!-- The ft_sensor plugin  -->
+    <!-- The ft_sensor plugin -->
     <gazebo>
-        <plugin name="${name}_ft_sensor" filename="libgazebo_ros_ft_sensor.so">
+      <plugin name="${name}_ft_sensor" filename="libgazebo_ros_ft_sensor.so">
         <updateRate>100.0</updateRate>
         <topicName>${name}/ft_sensor_topic</topicName> 
         <jointName>${name}_measure_joint</jointName>
-        <noise>
-          <type>gaussian</type>
-          <mean>0.0</mean>
-          <stddev>0.0</stddev> <!-- change this to simulate noise --> 
-        </noise>
-        </plugin>
-    </gazebo>
+        <gaussianNoise>0.001</gaussianNoise>
+      </plugin>
+	</gazebo>
 
     </xacro:macro>
 

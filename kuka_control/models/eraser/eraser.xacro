@@ -32,7 +32,7 @@
   </link>
 
   <gazebo reference="${side}_velcro_base">
-    <turnGravityOff>true</turnGravityOff>
+    <!--<turnGravityOff>true</turnGravityOff>-->
     <selfCollide>true</selfCollide>
     <mu1 value="0.01" />
     <mu2 value="0.01" />
@@ -68,7 +68,7 @@
   </link>
 
   <gazebo reference="${side}_tool_base">
-    <turnGravityOff>true</turnGravityOff>
+    <!--<turnGravityOff>true</turnGravityOff>-->
     <selfCollide>true</selfCollide>
     <mu1 value="0.01" />
     <mu2 value="0.01" />
@@ -105,7 +105,7 @@
   </link>
 
   <gazebo reference="${side}_tool0">
-    <turnGravityOff>true</turnGravityOff>
+    <!--<turnGravityOff>true</turnGravityOff>-->
     <selfCollide>true</selfCollide>
     <mu1 value="0.01" />
     <mu2 value="0.01" />
@@ -142,7 +142,7 @@
   </link>
 
   <gazebo reference="${side}_tool_tip">
-    <turnGravityOff>true</turnGravityOff>
+    <!--<turnGravityOff>true</turnGravityOff>-->
     <selfCollide>true</selfCollide>
     <mu1 value="0.01" />
     <mu2 value="0.01" />

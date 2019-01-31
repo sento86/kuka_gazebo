@@ -34,7 +34,7 @@
   </joint>
   
   <gazebo reference="${name}_link">
-      <turnGravityOff>false</turnGravityOff>
+      <!--<turnGravityOff>false</turnGravityOff>-->
       <selfCollide>false</selfCollide>
       <!--<material>Gazebo/Red</material>-->
       <material>wood</material>

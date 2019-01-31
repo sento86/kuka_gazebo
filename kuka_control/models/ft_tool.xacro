@@ -15,6 +15,13 @@
     <origin xyz="0 0 0.019" rpy="0 0 0"/>
   </xacro:ft_sensor_axia80>
   
+  <!-- Include the force-torque-sensor model -->
+  <!--<xacro:include filename="$(find sensor_description)/urdf/ft_sensor_ati.urdf.xacro"/>
+
+  <xacro:ft_sensor_ft45 parent="brida_link" name="axia80" type="ft45">
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+  </xacro:ft_sensor_ft45>-->
+  
   <!-- Include tool model -->
   <xacro:include filename="$(find kuka_control)/models/tool/tool.xacro"/>
 

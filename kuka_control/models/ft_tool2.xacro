@@ -1,0 +1,32 @@
+<?xml version="1.0"?>
+<robot name="ft_tool" xmlns:xacro="http://wiki.ros.org/xacro">
+
+  <!-- Include the force-torque-sensor model -->
+  <xacro:include filename="$(find sensor_description)/urdf/ft_sensor_ati.urdf.xacro"/>
+
+  <xacro:ft_sensor_ft45 parent="tool0" name="right" type="ft45">
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+  </xacro:ft_sensor_ft45>
+
+  <xacro:include filename="$(find rethink_ee_description)/urdf/plate/plate.xacro" />
+  <xacro:plate name="right_plate_gripper" depth="0.007" mass="0.16" parent="right_ft_measure"/> <!-- Plate (0.007) -->
+
+  <xacro:include filename="$(find rethink_ee_description)/urdf/nofingers_gripper/nofingers_gripper_force_torque_gazebo.xacro" />
+  <xacro:nofingers_gripper_force_torque_gazebo side="right" parent="right_plate_gripper"/>
+
+  <xacro:include filename="$(find rethink_ee_description)/urdf/plate/plate.xacro" />
+  <xacro:plate name="right_plate_eraser" depth="0.007" mass="0.03" parent="right_gripper_gazebo"/> <!-- Plate (0.007) -->
+
+  <!--<xacro:include filename="$(find rethink_ee_description)/urdf/nofingers_gripper/nofingers_gripper_force_torque.xacro" />
+  <xacro:nofingers_gripper_force_torque side="right" parent="right_plate_gripper"/>
+
+  <xacro:include filename="$(find rethink_ee_description)/urdf/plate/plate.xacro" />
+  <xacro:plate name="right_plate_eraser" depth="0.007" mass="0.03" parent="right_gripper"/>--> <!-- Plate (0.007) -->
+
+  <xacro:include filename="$(find rethink_ee_description)/urdf/eraser_tool/eraser_tool_force_torque.xacro" />
+  <xacro:eraser_tool_force_torque side="right" parent="right_plate_eraser"/>
+
+  <!--<xacro:include filename="$(find rethink_ee_description)/urdf/null_gripper/null_gripper_force_torque.xacro" />
+  <xacro:null_gripper_force_torque side="right" parent="right_tool_tip"/>-->
+
+</robot>
