@@ -8,6 +8,7 @@
   <arg name="R0" default="0"/>
   <arg name="P0" default="0"/>
   <arg name="Y0" default="0"/>
+  <arg name="gazebo" default="true" />
   
   <!-- Generate/Load robot description file without namespace -->
   <include file="$(find kuka_description)/launch/description.launch"/>
@@ -39,7 +40,8 @@
 	-J kuka_$(arg ns)::joint_a3 0
 	-J kuka_$(arg ns)::joint_a4 0
 	-J kuka_$(arg ns)::joint_a5 0
-	-J kuka_$(arg ns)::joint_a6 0"/>
+	-J kuka_$(arg ns)::joint_a6 0"
+        if="$(arg gazebo)"/>
 
     <!-- TODO -->
     <!--<remap from="/position_trajectory_controller/command" to="/kr6/position_trajectory_controller/command"/>
@@ -65,6 +67,11 @@
 
     <!-- convert joint states to TF transforms for rviz, etc -->
     <node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher" respawn="false" output="screen">
+      <param name="tf_prefix" type="string" value="$(arg ns)" />
+    </node>
+    
+    <node name="joint_state_publisher" pkg="joint_state_publisher" type="joint_state_publisher" respawn="false">
+      <param name="rate" type="double" value="100.0" />
       <param name="tf_prefix" type="string" value="$(arg ns)" />
     </node>
 

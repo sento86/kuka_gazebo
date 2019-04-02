@@ -2,6 +2,7 @@
 <launch>
 
   <!-- Rviz to vizualize robot -->
-  <node name="rviz" pkg="rviz" type="rviz" output="screen" args="-d '$(find kuka_control)/rviz/control.rviz'" />
+  <!--<node name="rviz" pkg="rviz" type="rviz" output="screen" args="-d '$(find kuka_control)/rviz/control.rviz'" />-->
+  <node name="rviz" pkg="rviz" type="rviz" output="screen" args="-d '$(find kuka_control)/rviz/kinect.rviz'" />
 
 </launch>

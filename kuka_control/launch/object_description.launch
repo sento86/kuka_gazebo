@@ -11,6 +11,7 @@
   <arg name="R0" default="0"/>
   <arg name="P0" default="0"/>
   <arg name="Y0" default="0"/>
+  <arg name="gazebo" default="true" />
 
 <!-- ****************************************************************************** -->
 
@@ -49,6 +50,7 @@
         -z $(arg z0)
         -R $(arg R0)
         -P $(arg P0)
-        -Y $(arg Y0)"/>
+        -Y $(arg Y0)"
+        if="$(arg gazebo)"/>
 
 </launch>
