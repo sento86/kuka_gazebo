@@ -47,6 +47,8 @@ class KR6control:
         self._cbCmdJoy = rospy.Subscriber("joy", Joy, self.callback_cmd_joy, queue_size=1)
         self._cbCmdJoint = rospy.Subscriber(self.ns+"/cmd_joint", JointState, self.callback_cmd_joint, queue_size=1)
         self._cbCmdVel = rospy.Subscriber(self.ns+"/cmd_vel", TwistStamped, self.callback_cmd_vel, queue_size=1)
+
+	print 'hola'
         
         self._cmd_joy = Joy
         self._cmd_joint = JointState
