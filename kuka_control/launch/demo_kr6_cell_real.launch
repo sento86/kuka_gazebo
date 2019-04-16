@@ -1,16 +1,34 @@
 <?xml version="1.0" encoding="utf-8"?>
 <launch>
 
+  <arg name="gazebo" default="false" />
+
   <!-- Launch Kuka Agilus KR6 -->
   <include file="$(find kuka_control)/launch/robot_real.launch">
     <arg name="ns" value=""/>
-    <arg name="x0" value="0"/>
-    <arg name="y0" value="0"/>
-    <arg name="z0" value="2"/>
+    <arg name="x0" value="-0.468"/>
+    <arg name="y0" value="0.01"/>
+    <arg name="z0" value="2.04"/>
     <arg name="R0" value="3.1416"/>
     <arg name="P0" value="0"/>
     <arg name="Y0" value="0"/>
   </include>
+
+  <!-- Launch cell -->
+  <include file="$(find kuka_control)/launch/object_description.launch">
+    <arg name="ns" value="cell"/>
+    <arg name="tf" value=""/>
+    <arg name="x0" value="0"/>
+    <arg name="y0" value="0"/>
+    <arg name="z0" value="0"/>
+    <arg name="R0" value="0"/>
+    <arg name="P0" value="0"/>
+    <arg name="Y0" value="0"/>
+    <arg name="gazebo" value="$(arg gazebo)"/>
+  </include>
+
+  <!-- Launch visualization -->
+  <include file="$(find kuka_control)/launch/rviz.launch"/>
 
   <!-- Launch the MoveIt! move group -->
 <!--  <include file="$(find kuka_control)/launch/moveit.launch"/>-->

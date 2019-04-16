@@ -1,0 +1,13 @@
+<?xml version="1.0"?>
+<launch>
+
+  <arg name="user" default="00"/>
+  <arg name="test" default="00"/>
+  <arg name="ns" default=""/>
+  <arg name="topic" default="camera"/>
+
+  <node pkg="rosbag" type="record" name="rosbag_all"
+        args="-o /home/idf/rosbag/user$(arg user)_test$(arg test)_all.bag --split --duration=10m
+		-a -x $(arg ns)/$(arg topic)(.*)"/>
+
+</launch>

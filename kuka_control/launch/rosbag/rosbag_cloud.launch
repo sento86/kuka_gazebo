@@ -1,0 +1,29 @@
+<?xml version="1.0"?>
+<launch>
+
+  <arg name="user" default="00"/>
+  <arg name="test" default="00"/>
+  <arg name="ns" default=""/>
+  <arg name="topic" default="camera"/>
+  <arg name="rate" default="5.0"/>
+
+  <node pkg="rosbag" type="record" name="rosbag_$(arg topic)"
+        args="-o /home/idf/rosbag/user$(arg user)_test$(arg test)_$(arg topic).bag --split --duration=5m
+		$(arg ns)/$(arg topic)/driver/parameter_descriptions
+		$(arg ns)/$(arg topic)/driver/parameter_updates
+		$(arg ns)/$(arg topic)/depth_rectify_depth/parameter_descriptions
+		$(arg ns)/$(arg topic)/depth_rectify_depth/parameter_updates
+		$(arg ns)/$(arg topic)/rgb_rectify_depth/parameter_descriptions
+		$(arg ns)/$(arg topic)/rgb_rectify_depth/parameter_updates
+
+		$(arg ns)/$(arg topic)/depth_registered/camera_info_throttle
+		$(arg ns)/$(arg topic)/depth_registered/points_throttle
+		$(arg ns)/$(arg topic)/rgb/camera_info_throttle
+		$(arg ns)/$(arg topic)/rgb/image_rect_color_throttle"/>
+
+  <node pkg="topic_tools" type="throttle" name="throttle_$(arg topic)_depth_info" args="messages $(arg ns)/$(arg topic)/depth_registered/camera_info 1"/>
+  <node pkg="topic_tools" type="throttle" name="throttle_$(arg topic)_depth_points" args="messages $(arg ns)/$(arg topic)/depth_registered/points 1"/>
+  <node pkg="topic_tools" type="throttle" name="throttle_$(arg topic)_rgb_info" args="messages $(arg ns)/$(arg topic)/rgb/camera_info 1"/>
+  <node pkg="topic_tools" type="throttle" name="throttle_$(arg topic)_rgb_image" args="messages $(arg ns)/$(arg topic)/rgb/image_rect_color $(arg rate)"/>
+
+</launch>

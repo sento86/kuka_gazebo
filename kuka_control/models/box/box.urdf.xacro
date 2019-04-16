@@ -7,7 +7,7 @@
   <xacro:include filename="$(find kuka_control)/models/box/box.xacro"/>
 
   <!-- Box -->
-  <xacro:box_metal name="box" parent="base_link">
+  <xacro:box_metal name="box" parent="cell_link">
       <origin xyz="0.0 0.0 0.74" rpy="0 0 0" />
   </xacro:box_metal>
 

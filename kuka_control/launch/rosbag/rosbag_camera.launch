@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<launch>
+
+  <arg name="user" default="00"/>
+  <arg name="test" default="00"/>
+  <arg name="ns" default=""/>
+  <arg name="topic" default="camera"/>
+  <arg name="rate" default="5.0"/>
+
+  <node pkg="rosbag" type="record" name="rosbag_$(arg topic)"
+        args="-o /home/idf/rosbag/user$(arg user)_test$(arg test)_$(arg topic).bag --split --duration=5m
+		$(arg ns)/$(arg topic)/camera_info_throttle
+		$(arg ns)/$(arg topic)/camera_info_std_throttle
+		$(arg ns)/$(arg topic)/image_throttle"/>
+
+  <node pkg="topic_tools" type="throttle" name="throttle_$(arg topic)_info" args="messages $(arg ns)/$(arg topic)/camera_info 1.0"/>
+  <node pkg="topic_tools" type="throttle" name="throttle_$(arg topic)_info_std" args="messages $(arg ns)/$(arg topic)/camera_info_std 1.0"/>
+  <node pkg="topic_tools" type="throttle" name="throttle_$(arg topic)_image" args="messages $(arg ns)/$(arg topic)/image $(arg rate)"/>
+
+</launch>

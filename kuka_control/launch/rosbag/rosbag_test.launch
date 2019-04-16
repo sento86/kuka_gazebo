@@ -1,0 +1,10 @@
+<?xml version="1.0"?>
+<launch>
+
+  <arg name="user" default="00"/>
+  <arg name="test" default="01"/>
+
+  <node pkg="rosbag" type="record" name="rosbag_all"
+        args="-o /home/idf/rosbag/user$(arg user)_test$(arg test)_all.bag --split --size=2048 -a"/>
+
+</launch>

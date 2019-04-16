@@ -1,0 +1,47 @@
+<?xml version="1.0"?>
+<launch>
+
+  <arg name="user" default="00"/>
+  <arg name="test" default="01"/>
+
+  <!-- Cameras -->
+  <!--<include file="$(find kuka_control)/launch/rosbag/rosbag_camera.launch">
+      <arg name="user" value="$(arg user)"/>
+      <arg name="test" value="$(arg test)"/>
+      <arg name="ns" value="cameras"/>
+      <arg name="topic" value="head_camera"/>
+      <arg name="rate" value="5.0"/>
+  </include>-->
+
+  <!--<include file="$(find kuka_control)/launch/rosbag/rosbag_camera.launch">
+      <arg name="user" value="$(arg user)"/>
+      <arg name="test" value="$(arg test)"/>
+      <arg name="ns" value="cameras"/>
+      <arg name="topic" value="right_hand_camera"/>
+      <arg name="rate" value="10.0"/>
+  </include>-->
+  
+  <!-- Point Clouds -->
+  <include file="$(find kuka_control)/launch/rosbag/rosbag_cloud.launch">
+      <arg name="user" value="$(arg user)"/>
+      <arg name="test" value="$(arg test)"/>
+      <arg name="ns" value=""/>
+      <arg name="topic" value="camera3"/>
+      <arg name="rate" value="10.0"/>
+  </include>
+
+  <!--<include file="$(find kuka_control)/launch/rosbag/rosbag_cloud.launch">
+      <arg name="user" value="$(arg user)"/>
+      <arg name="test" value="$(arg test)"/>
+      <arg name="topic" value="camera2"/>
+      <arg name="rate" value="5.0"/>
+  </include>-->
+
+  <!-- All remaining data -->
+  <include file="$(find kuka_control)/launch/rosbag/rosbag_all.launch">
+      <arg name="user" value="$(arg user)"/>
+      <arg name="test" value="$(arg test)"/>
+      <arg name="topic" value="camera"/>
+  </include>
+  
+</launch>
