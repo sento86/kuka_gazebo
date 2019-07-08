@@ -7,7 +7,7 @@
   <xacro:include filename="$(find kuka_control)/models/car_door/car_door.xacro"/>
 
   <!-- Car door (Vito) -->
-  <xacro:car_door name="door1" parent="base_link">
+  <xacro:car_door name="door1" parent="cell_link">
       <origin xyz="0.0 0.0 0.8" rpy="0 0 0" />
   </xacro:car_door>
 

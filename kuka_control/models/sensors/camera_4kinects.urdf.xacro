@@ -8,22 +8,22 @@
   <xacro:include filename="$(find kuka_control)/models/sensors/kinect_camera.urdf.xacro" />
 
   <!-- Kinect sensor (k1) -->
-  <xacro:kinect_camera name="camera1" parent="base_link">
+  <xacro:kinect_camera name="camera1" parent="cell_link">
       <origin xyz="-1.0 0.0 2.0" rpy="0 ${40.0*M_PI/180.0} 0" />
   </xacro:kinect_camera>
 
   <!-- Kinect sensor (k2) -->
-  <xacro:kinect_camera name="camera2" parent="base_link">
+  <xacro:kinect_camera name="camera2" parent="cell_link">
     <origin xyz="0.0 -1.0 2.0" rpy="0 ${40.0*M_PI/180.0} ${M_PI/2}" />
   </xacro:kinect_camera>
 
   <!-- Kinect sensor (k3) -->
-  <xacro:kinect_camera name="camera3" parent="base_link">
+  <xacro:kinect_camera name="camera3" parent="cell_link">
       <origin xyz="1.0 0.0 2.0" rpy="0 ${40.0*M_PI/180.0} ${M_PI}" />
   </xacro:kinect_camera>
 
   <!-- Kinect sensor (k4) -->
-  <xacro:kinect_camera name="camera4" parent="base_link">
+  <xacro:kinect_camera name="camera4" parent="cell_link">
     <origin xyz="0.0 1.0 2.0" rpy="0 ${40.0*M_PI/180.0} ${-M_PI/2.0}" />
   </xacro:kinect_camera>
 
