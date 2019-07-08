@@ -110,6 +110,7 @@ include_directories(
 
 ## Declare a cpp executable
 add_executable(kuka_gamepad src/kuka_gamepad.cpp)
+add_executable(kuka_hololens src/kuka_hololens.cpp)
 #add_executable(kuka_falcon src/kuka_falcon.cpp)
 #add_executable(kuka_falcon_all src/kuka_falcon_all.cpp)
 #add_executable(kuka_phantom src/kuka_phantom.cpp)
@@ -120,6 +121,7 @@ add_executable(kuka_gamepad src/kuka_gamepad.cpp)
 ## Add cmake target dependencies of the executable/library
 ## as an example, message headers may need to be generated before nodes
 add_dependencies(kuka_gamepad ${catkin_EXPORTED_TARGETS})
+add_dependencies(kuka_hololens ${catkin_EXPORTED_TARGETS})
 #add_dependencies(kuka_falcon ${catkin_EXPORTED_TARGETS})
 #add_dependencies(kuka_falcon_all ${catkin_EXPORTED_TARGETS})
 #add_dependencies(kuka_phantom ${catkin_EXPORTED_TARGETS})
@@ -129,6 +131,7 @@ add_dependencies(kuka_gamepad ${catkin_EXPORTED_TARGETS})
 
 ## Specify libraries to link a library or executable target against
 target_link_libraries(kuka_gamepad ${catkin_LIBRARIES})
+target_link_libraries(kuka_hololens ${catkin_LIBRARIES})
 #target_link_libraries(kuka_falcon ${catkin_LIBRARIES})
 #target_link_libraries(kuka_falcon_all ${catkin_LIBRARIES})
 #target_link_libraries(kuka_phantom ${catkin_LIBRARIES})

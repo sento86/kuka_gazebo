@@ -1,0 +1,36 @@
+# Cartesian linear/angular velocities (Gripper)
+max_vx: 0.2 # m/s
+max_vy: 0.2 # m/s
+max_vz: 0.2 # m/s
+max_wx: 0.5 # rad/s
+max_wy: 0.5 # rad/s
+max_wz: 0.5 # rad/s
+
+# Sign for linear/angular velocities (Gripper)
+sign_vx: 1.0
+sign_vy: 1.0
+sign_vz: 1.0
+sign_wx: 1.0
+sign_wy: 1.0
+sign_wz: 1.0
+
+# Input axes (Joystick)
+#axis_vx: 0
+#axis_vy: 1
+#axis_vz: 2
+#axis_wz: 3
+#axis_wy: 4
+#axis_wx: 5
+axis_vx: 1
+axis_vy: 0
+axis_vz: 3
+axis_wx: 4
+axis_wy: 5
+axis_wz: 2
+
+# Input buttons (Joystick)
+#deadman_button: 0
+deadman_button: 6
+
+# Timeout for joystick reset (<0 no timeout)
+joy_msg_timeout: -1
