@@ -8,7 +8,7 @@
   <arg name="R0" default="0"/>
   <arg name="P0" default="0"/>
   <arg name="Y0" default="0"/>
-  <arg name="gazebo" default="true" />
+  <arg name="gazebo" default="false" />
   
   <!-- Generate/Load robot description file without namespace -->
   <include file="$(find kuka_description)/launch/description.launch"/>

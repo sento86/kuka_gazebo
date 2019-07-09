@@ -1,10 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <launch>
 
-  <!-- Launch the Gazebo simulation -->
-  <include file="$(find kuka_gazebo)/launch/empty_world.launch"/>
+  <arg name="gazebo" default="true" />
 
   <!-- Launch the Gazebo simulation -->
+  <include file="$(find kuka_gazebo)/launch/empty_world.launch" if="$(arg gazebo)"/>
+
+  <!-- Launch Kuka Agilus KR6 in Gazebo simulator -->
   <include file="$(find kuka_control)/launch/robot.launch">
     <arg name="ns" value="kr6"/>
     <arg name="x0" value="0"/>
@@ -13,10 +15,13 @@
     <arg name="R0" value="0"/>
     <arg name="P0" value="0"/>
     <arg name="Y0" value="0"/>
+    <arg name="gazebo" value="$(arg gazebo)"/>
   </include>
 
   <!-- Launch visualization -->
-  <include file="$(find kuka_control)/launch/rviz.launch"/>
+  <include file="$(find kuka_control)/launch/rviz.launch">
+    <arg name="gazebo" value="$(arg gazebo)"/>
+  </include>
 
   <!-- Launch the MoveIt! move group -->
 <!--  <include file="$(find kuka_control)/launch/moveit.launch"/>-->

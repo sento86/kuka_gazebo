@@ -11,7 +11,7 @@
   <arg name="R0" default="0"/>
   <arg name="P0" default="0"/>
   <arg name="Y0" default="0"/>
-  <arg name="gazebo" default="true" />
+  <arg name="gazebo" default="false" />
 
 <!-- ****************************************************************************** -->
 
@@ -21,7 +21,7 @@
 <!-- ****************************************************************************** -->
 
   <!-- Create Robot model -->
-  <param name="$(arg ns)/robot_description" command="$(find xacro)/xacro --inorder '$(find kuka_control)/models/$(arg ns)/$(arg ns).urdf.xacro'" />
+  <param name="$(arg ns)/robot_description" command="$(find xacro)/xacro --inorder '$(find kuka_control)/models/$(arg ns)/$(arg ns).urdf.xacro' gazebo:=$(arg gazebo)" />
   <!--<param name="$(arg ns)/robot_description" textfile="$(find kuka_control)/models/cell_idf/model.sdf" />-->
 
 <!-- ****************************************************************************** -->

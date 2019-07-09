@@ -1,0 +1,93 @@
+<?xml version="1.0"?>
+
+<robot xmlns:xacro="http://ros.org/wiki/xacro">
+
+  <!--<xacro:include filename="$(find kuka_control)/urdf/definitions.xacro" />-->
+  
+  	<!-- Common tools: PI, inertias of a cuboid and cylinder -->
+	<xacro:property name="M_PI" value="3.1415926535897931"/>
+	<xacro:macro name="cuboid_inertia_def" params="width height length mass">
+	<inertia ixx="${mass * (height * height + length * length) / 12}"
+		     iyy="${mass * (width * width + length * length) / 12}"
+		     izz="${mass * (width * width + height * height) / 12}"
+		     ixy="0" iyz="0" ixz="0"/>
+	</xacro:macro>
+	<xacro:macro name="cylinder_inertia_def" params="radius length mass">
+	<inertia ixx="${mass * (3 * radius * radius + length * length) / 12}"
+		     iyy="${mass * (3 * radius * radius + length * length) / 12}"
+		     izz="${mass * radius* radius / 2}"
+		     ixy="0" iyz="0" ixz="0"/>
+	</xacro:macro>
+
+    <xacro:macro name="manfrotto" params="name parent r1 r2 r3 *origin">
+    
+      <joint name="${name}_base_joint" type="fixed">
+        <xacro:insert_block name="origin" />
+        <parent link="${parent}"/>
+        <child link="${name}_base"/>
+      </joint>
+
+      <link name="${name}_base">
+        <visual>
+          <origin xyz="0 0 0" rpy="0 0 0" />
+          <geometry>
+            <mesh filename="package://kuka_control/models/manfrotto/meshes/manfrotto_link0.dae"/>
+          </geometry>
+        </visual>
+      </link>
+      
+      <joint name="${name}_link1_joint" type="fixed">
+        <origin xyz="0 0 0.057" rpy="0 0 ${r1}" />
+        <parent link="${name}_base"/>
+        <child link="${name}_link1"/>
+      </joint>
+
+      <link name="${name}_link1">
+        <visual>
+          <origin xyz="0 0 0" rpy="0 0 0" />
+          <geometry>
+            <mesh filename="package://kuka_control/models/manfrotto/meshes/manfrotto_link1.dae"/>
+          </geometry>
+        </visual>
+      </link>
+      
+      <joint name="${name}_link2_joint" type="fixed">
+        <origin xyz="0.03575 0 0.0463" rpy="${r2} 0 0" />
+        <parent link="${name}_link1"/>
+        <child link="${name}_link2"/>
+      </joint>
+
+      <link name="${name}_link2">
+        <visual>
+          <origin xyz="0 0 0" rpy="0 0 0" />
+          <geometry>
+            <mesh filename="package://kuka_control/models/manfrotto/meshes/manfrotto_link2.dae"/>
+          </geometry>
+        </visual>
+      </link>
+      
+      <joint name="${name}_link3_joint" type="fixed">
+        <origin xyz="0 0.036753 0.02475" rpy="0 ${r3} 0" />
+        <parent link="${name}_link2"/>
+        <child link="${name}_link3"/>
+      </joint>
+
+      <link name="${name}_link3">
+        <visual>
+          <origin xyz="0 0 0" rpy="0 0 0" />
+          <geometry>
+            <mesh filename="package://kuka_control/models/manfrotto/meshes/manfrotto_link3.dae"/>
+          </geometry>
+        </visual>
+      </link>
+      
+      <joint name="${name}_frame_joint" type="fixed">
+        <origin xyz="0.0 -0.036753 0.05" rpy="0 0 0" />
+        <parent link="${name}_link3"/>
+        <child link="${name}_frame"/>
+      </joint>
+
+      <link name="${name}_frame"/>
+
+    </xacro:macro>
+  </robot>

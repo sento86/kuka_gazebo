@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<robot name="cell" xmlns:xacro="http://ros.org/wiki/xacro">
+
+  <xacro:arg name="gazebo" default="false"/>
+
+  <!-- Depth cameras -->
+  <xacro:include filename="$(find kuka_control)/models/sensors/asus_camera.urdf.xacro" />
+  <xacro:include filename="$(find kuka_control)/models/sensors/kinect_camera.urdf.xacro" />
+
+  <!-- Manfrotto PTU base -->
+  <xacro:include filename="$(find kuka_control)/models/manfrotto/manfrotto.xacro" />
+
+ <!--  Manfrotto 1 (mf1) -->
+  <xacro:manfrotto name="mf1" parent="cell_link" r1="${-M_PI/2+1*M_PI/180.0}" r2="${-2*M_PI/180.0}" r3="${58.0*M_PI/180.0}">
+    <origin xyz="0.04 0.925 1.98" rpy="0 0 0" />
+  </xacro:manfrotto>
+
+ <!--  Manfrotto 2 (mf2) -->
+  <xacro:manfrotto name="mf2" parent="cell_link" r1="${M_PI/2.0+2*M_PI/180.0}" r2="0" r3="${57.0*M_PI/180.0}">
+    <origin xyz="-0.04 -0.925 1.96" rpy="0 0 0" />
+  </xacro:manfrotto>
+
+ <!--  Manfrotto 3 (mf3) -->
+  <xacro:manfrotto name="mf3" parent="cell_link" r1="${-65*M_PI/180.0}" r2="${0.5*M_PI/180.0}" r3="${5*M_PI/180.0}">
+    <origin xyz="-1.2 0.95 1.05" rpy="0 0 0" />
+  </xacro:manfrotto>
+
+ <!--  Kinect sensors -->
+  <xacro:kinect_camera name="camera1" parent="mf1_frame" gazebo="$(arg gazebo)">
+    <origin xyz="0.01 0 0.02" rpy="0 0 0" />
+  </xacro:kinect_camera>
+
+  <xacro:kinect_camera name="camera2" parent="mf2_frame" gazebo="$(arg gazebo)">
+    <origin xyz="0.01 0 0.02" rpy="0 0 0" />
+  </xacro:kinect_camera>
+
+  <xacro:kinect_camera name="camera3" parent="mf3_frame" gazebo="$(arg gazebo)">
+    <origin xyz="0.01 0 0.02" rpy="0 0 0" />
+  </xacro:kinect_camera>
+
+
+</robot>

@@ -28,7 +28,9 @@
   </include>
 
   <!-- Launch visualization -->
-  <include file="$(find kuka_control)/launch/rviz.launch"/>
+  <include file="$(find kuka_control)/launch/rviz.launch">
+    <arg name="gazebo" value="$(arg gazebo)"/>
+  </include>
 
   <!-- Launch the MoveIt! move group -->
 <!--  <include file="$(find kuka_control)/launch/moveit.launch"/>-->

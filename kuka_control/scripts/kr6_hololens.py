@@ -153,16 +153,16 @@ class KR6control:
         self.ns = ns
         self.pubTrajectory_ = rospy.Publisher("/position_trajectory_controller/command", JointTrajectory, queue_size=1)
         self.pubTrajectory = rospy.Publisher(self.ns + "/position_trajectory_controller/command", JointTrajectory, queue_size=1)
-        
-        self._cbJointState = rospy.Subscriber(self.ns + "/joint_states", JointState, self.callback_joint_states, queue_size=1)
-        self._cbCmdJoint = rospy.Subscriber(self.ns + "/cmd_joint", JointState, self.callback_cmd_joint, queue_size=1)
-        self._cbCmdVel = rospy.Subscriber(self.ns + "/cmd_vel", TwistStamped, self.callback_cmd_vel, queue_size=1)
-        self._cbFTSensor= rospy.Subscriber(self.ns + "/axia80/ft_sensor_topic", WrenchStamped, self.callback_ft_sensor, queue_size=1) #Simulation
 
         self.pub_coords = rospy.Publisher('/point', Point, queue_size=1)
         self.pub_tool = rospy.Publisher('/tool', PoseStamped, queue_size=1)
         self.pub_object = rospy.Publisher('/object', PoseStamped, queue_size=1)
         self.pub_ft = rospy.Publisher('/ft', Twist, queue_size=1)
+        
+        self._cbJointState = rospy.Subscriber(self.ns + "/joint_states", JointState, self.callback_joint_states, queue_size=1)
+        self._cbCmdJoint = rospy.Subscriber(self.ns + "/cmd_joint", JointState, self.callback_cmd_joint, queue_size=1)
+        self._cbCmdVel = rospy.Subscriber(self.ns + "/cmd_vel", TwistStamped, self.callback_cmd_vel, queue_size=1)
+        self._cbFTSensor= rospy.Subscriber(self.ns + "/axia80/ft_sensor_topic", WrenchStamped, self.callback_ft_sensor, queue_size=1) #Simulation
         
         self.go_home()
         
@@ -229,8 +229,8 @@ class KR6control:
         self.ft_twist.linear = self.ft_sensor.wrench.force
         self.ft_twist.angular = self.ft_sensor.wrench.torque
         
-        print self.ft_sensor
-        print self.ft_twist
+        #print self.ft_sensor
+        #print self.ft_twist
         
         self.pub_ft.publish(self.ft_twist)
             
